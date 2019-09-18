@@ -20,6 +20,11 @@ import {
   NbToastrModule,
   NbWindowModule,
 } from '@nebular/theme';
+import { TranslateModule } from './Lib/ngx-translate/public_api';
+import { AppTranslationModule } from "./Translate/AppTranslationModule";
+import { IonicModule } from '@ionic/angular';
+import { ComponentsModule } from './components/components.module';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -41,6 +46,11 @@ import {
       messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
     }),
     CoreModule.forRoot(),
+    AppTranslationModule,
+
+    TranslateModule,
+    ComponentsModule,
+    IonicModule.forRoot(),
   ],
   bootstrap: [AppComponent],
 })

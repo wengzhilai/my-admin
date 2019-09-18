@@ -39,6 +39,9 @@ import { COSMIC_THEME } from './styles/theme.cosmic';
 import { CORPORATE_THEME } from './styles/theme.corporate';
 import { DARK_THEME } from './styles/theme.dark';
 
+import { TranslateModule } from '../Lib/ngx-translate/public_api';
+import { PipesModule } from '../pipes/pipes.module';
+
 const NB_MODULES = [
   NbLayoutModule,
   NbMenuModule,
@@ -71,7 +74,11 @@ const PIPES = [
 ];
 
 @NgModule({
-  imports: [CommonModule, ...NB_MODULES],
+  imports: [
+    TranslateModule,
+    PipesModule,
+    CommonModule, 
+    ...NB_MODULES],
   exports: [CommonModule, ...PIPES, ...COMPONENTS],
   declarations: [...COMPONENTS, ...PIPES],
 })
@@ -82,7 +89,7 @@ export class ThemeModule {
       providers: [
         ...NbThemeModule.forRoot(
           {
-            name: 'default',
+            name: 'corporate',
           },
           [ DEFAULT_THEME, COSMIC_THEME, CORPORATE_THEME, DARK_THEME ],
         ).providers,

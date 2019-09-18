@@ -5,6 +5,7 @@ import { UserData } from '../../../@core/data/users';
 import { LayoutService } from '../../../@core/utils';
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { Fun } from '../../../Config/Fun';
 
 @Component({
   selector: 'ngx-header',
@@ -38,7 +39,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   currentTheme = 'default';
 
-  userMenu = [ { title: 'Profile' }, { title: 'Log out' } ];
+  userMenu = [{ title: Fun.LanguageStr("Theme.Profile"),link:"user/Profile" }, { title: Fun.LanguageStr("Theme.LoginOut"),url:"#/auth/login" }];
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
