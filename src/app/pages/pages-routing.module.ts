@@ -11,6 +11,31 @@ const routes: Routes = [{
   component: PagesComponent,
   children: [
     {
+      path: 'user',
+      loadChildren: () => import('./user/user.module')
+        .then(m => m.UserModule),
+    }, 
+    {
+      path: 'query',
+      loadChildren: () => import('./query/query.module')
+        .then(m => m.QueryModule),
+    },
+    {
+      path: 'quartztask',
+      loadChildren: () => import('./quartz-task/quartz-task.module')
+        .then(m => m.QuartzTaskModule),
+    },
+    {
+      path: 'task',
+      loadChildren: () => import('./task/task.module')
+        .then(m => m.TaskModule),
+    },
+    {
+      path: 'equipment',
+      loadChildren: () => import('./equipment/equipment.module')
+        .then(m => m.EquipmentModule),
+    },
+    {
       path: 'dashboard',
       component: ECommerceComponent,
     },

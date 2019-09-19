@@ -24,7 +24,7 @@ import { TranslateModule } from './Lib/ngx-translate/public_api';
 import { AppTranslationModule } from "./Translate/AppTranslationModule";
 import { IonicModule } from '@ionic/angular';
 import { ComponentsModule } from './components/components.module';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [AppComponent],
@@ -51,6 +51,7 @@ import { ComponentsModule } from './components/components.module';
     TranslateModule,
     ComponentsModule,
     IonicModule.forRoot(),
+    NgbModule,
   ],
   bootstrap: [AppComponent],
 })
