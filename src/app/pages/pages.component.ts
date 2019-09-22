@@ -67,6 +67,7 @@ export class PagesComponent implements OnInit {
     let reArr: NbMenuItem[] = []
     inJson.forEach(element => {
       let url:String=element["LOCATION"]
+      console.log(url)
       if(url==null) url="";
       reArr.unshift({
         data: element["ID"],
