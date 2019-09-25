@@ -32,12 +32,12 @@ export class PagesComponent implements OnInit {
   }
 
   LoadModule() {
-    this.httpHelper.Post("Module/GetUserMenu", null).then((x: DtoResultObj<any>) => {
-      if(!x.IsSuccess){
-        Fun.Hint(x.Msg);
+    this.httpHelper.Post("user/module/getUserMenu", null).then((x: DtoResultObj<any>) => {
+      if(!x.success){
+        Fun.Hint(x.msg);
         return;
       }
-      let nowMenu = this.JsonToMenuItemJson(x.DataList)
+      let nowMenu = this.JsonToMenuItemJson(x.dataList)
       var frist:NbMenuItem[]=[{
         title: "首页",
         icon: 'nb-e-commerce',
@@ -66,13 +66,13 @@ export class PagesComponent implements OnInit {
   JsonToMenuItemJson(inJson: any[]) {
     let reArr: NbMenuItem[] = []
     inJson.forEach(element => {
-      let url:String=element["LOCATION"]
+      let url:String=element["location"]
       console.log(url)
       if(url==null) url="";
       reArr.unshift({
-        data: element["ID"],
-        title: element["NAME"],
-        icon: element["IMAGE_URL"],
+        data: element["id"],
+        title: element["name"],
+        icon: element["imageUrl"],
         link: url.split('?')[0],
         queryParams: Fun.UrlToJosn(url),
         home:true,

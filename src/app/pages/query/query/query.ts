@@ -91,11 +91,11 @@ export class QueryQueryComponent implements OnInit {
     this.LoadSetting = false;
     let postEnt = { Key: this.code }
     return this.HttpHelper.Post("query/GetSingleQuery", postEnt).then((data: DtoResultObj<any>) => {
-      if (data.IsSuccess) {
+      if (data.success) {
         //显示table
         this.LoadSetting = true;
 
-        this.queryEnt = data.Data
+        this.queryEnt = data.data
         //隐藏，hide=true的字段
         let t: any = {}
         //设置列配置
@@ -190,13 +190,13 @@ export class QueryQueryComponent implements OnInit {
     this.GetBean(defaultData, readUrl).then((x: DtoResultObj<any>) => {
       Fun.HideLoading();
       console.log(x);
-      if (x == null || !x.IsSuccess) {
+      if (x == null || !x.success) {
         console.log("获取取初始值失败")
         //如果获取取初始值失败，则用列表数据
-        x.Data = defaultData;
+        x.data = defaultData;
       }
       console.log("获取取初始值")
-      console.log(x.Data)
+      console.log(x.data)
 
       let title = "修改"
       if (defaultData != null) {
@@ -204,13 +204,13 @@ export class QueryQueryComponent implements OnInit {
       }
       let thisOpenMode=this.GetComponents(openModal);
       console.log(thisOpenMode);
-      console.log(x.Data);
+      console.log(x.data);
       console.log(this.configJson);
       this.windowService.open(thisOpenMode, {
         windowClass: "DivWindow",
         title: title,
         context: {
-          bean: x.Data,
+          bean: x.data,
           inputs: this.configJson,
           buttons: [{
             name: "确定", click: (x) => {
@@ -218,18 +218,18 @@ export class QueryQueryComponent implements OnInit {
                 console.log(x);
                 if (window.confirm('确定要保存吗？')) {
                   let postClass: DtoSaveObj<any> = new DtoSaveObj<any>();
-                  postClass.Data = x;
+                  postClass.data = x;
                   postClass.SaveFieldList = Fun.GetBeanNameStr(x);
                   await Fun.ShowLoading();
 
                   this.HttpHelper.Post(apiUrl, postClass).then((data: DtoResultObj<any>) => {
                     Fun.HideLoading();
                     console.log(data)
-                    if (data.IsSuccess) {
+                    if (data.success) {
                       this.source.refresh()
                     }
                     else {
-                      Fun.Hint(data.Msg)
+                      Fun.Hint(data.msg)
                     }
                     resolve(data);
                   });
@@ -291,11 +291,11 @@ export class QueryQueryComponent implements OnInit {
       this.HttpHelper.Post(apiUrl, postClass).then((data: DtoResultObj<any>) => {
         Fun.HideLoading()
         console.log(data)
-        if (data.IsSuccess) {
+        if (data.success) {
           this.source.refresh()
         }
         else {
-          Fun.Hint(data.Msg)
+          Fun.Hint(data.msg)
         }
       });
     }

@@ -51,11 +51,11 @@ export class InputSelectComponent implements OnInit {
     Fun.ShowLoading();
     this.httpHelper.Post(this.ApiUrl, this.PostEnt).then((x: DtoResultObj<any>) => {
       Fun.HideLoading();
-      if (x.IsSuccess) {
-        this.ListData = x.Data.rows;
+      if (x.success) {
+        this.ListData = x.data.rows;
       }
       else{
-        Fun.Hint(x.Msg)
+        Fun.Hint(x.msg)
       }
     });
   }

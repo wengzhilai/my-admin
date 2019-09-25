@@ -37,14 +37,14 @@ export class SmartTableDataSource extends LocalDataSource {
     return this.requestElements()
       .pipe(map(res => {
         //用于Query查询
-        if(res.Data!=null && res.Data.rows!=null && res.Data.total!=null){
-          res.Msg=res.Data.total;
-          res.DataList=res.Data.rows;
+        if(res.data!=null && res.data.rows!=null && res.data.total!=null){
+          res.msg=res.data.total;
+          res.dataList=res.data.rows;
         }
 
 
         this.lastRequestCount = this.extractTotalFromResponse(res);
-        this.data = res.DataList;
+        this.data = res.dataList;
         console.log(this.lastRequestCount);
         console.log(this.data);
         Fun.HideLoading();
@@ -62,8 +62,8 @@ export class SmartTableDataSource extends LocalDataSource {
     const rawData = res;
     // const data = !!this.conf.dataKey ? getDeepFromObject(rawData, this.conf.dataKey, []) : rawData;
     const data=res
-    if (data.Data instanceof Array) {
-      return data.Data;
+    if (data.data instanceof Array) {
+      return data.data;
     }
     else {
       return [];
@@ -79,10 +79,10 @@ export class SmartTableDataSource extends LocalDataSource {
   protected extractTotalFromResponse(res: DtoResultObj<any>): number {
     console.log("从第一条提出总数");
     let total: number = 0
-    if (res.Msg == null || res.Msg == "") {
-      total = res.DataList.length;
+    if (res.msg == null || res.msg == "") {
+      total = res.dataList.length;
     } else {
-      total = parseInt(res.Msg);
+      total = parseInt(res.msg);
     }
     return total
   }
@@ -113,7 +113,7 @@ export class SmartTableDataSource extends LocalDataSource {
         postBean.WhereList.push({ ObjFiled: keyName, Value: par.get(key), OpType: "like",FieldType: column["type"],FieldName:keyName}); //排序字段
       }
     })
-    postBean.Code = this.inKey
+    postBean.code = this.inKey
     if(postBean.rows==null)postBean.rows=1;
     if(postBean.page==null)postBean.page=10;
     return this.httpHelper.PostToObservable(this.conf.endPoint, postBean).pipe(x => {

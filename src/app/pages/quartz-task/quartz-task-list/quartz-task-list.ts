@@ -104,15 +104,15 @@ export class QuartzTaskListPage implements OnInit {
   async ReLoad(){
     //先根据ID找到对象
     this.HttpHelper.Post("QuartzTask/IsStarted", null).then(async (x: DtoResultObj<any>) => {
-      if (x.IsSuccess) {
-        this.IsStart=x.Data;
+      if (x.success) {
+        this.IsStart=x.data;
         if(this.IsStart){
           this.source.refresh()
         }
       }
       else{
         this.IsStart=false;
-        Fun.Hint(x.Msg)
+        Fun.Hint(x.msg)
       }
     })
   }
@@ -127,13 +127,13 @@ export class QuartzTaskListPage implements OnInit {
     await Fun.ShowLoading();
     this.HttpHelper.Post("QuartzTask/Start", null).then(async (x: DtoResultObj<any>) => {
       await Fun.HideLoading()
-      if (x.IsSuccess) {
+      if (x.success) {
         Fun.Hint("启动成功")
 
         this.ReLoad();
       }
       else{
-        Fun.Hint(x.Msg)
+        Fun.Hint(x.msg)
       }
     })
   }
@@ -143,12 +143,12 @@ export class QuartzTaskListPage implements OnInit {
     await Fun.ShowLoading();
     this.HttpHelper.Post("QuartzTask/Stop", null).then(async (x: DtoResultObj<any>) => {
       await Fun.HideLoading()
-      if (x.IsSuccess) {
+      if (x.success) {
         Fun.Hint("停止成功")
         this.ReLoad();
       }
       else{
-        Fun.Hint(x.Msg)
+        Fun.Hint(x.msg)
       }
     })
   }
@@ -172,18 +172,18 @@ export class QuartzTaskListPage implements OnInit {
               console.log(x);
               if (window.confirm('确定要保存吗？')) {
                 let postClass: DtoSaveObj<any> = new DtoSaveObj<any>();
-                postClass.Data = x;
+                postClass.data = x;
                 postClass.SaveFieldList = Fun.GetBeanNameStr(x);
                 await Fun.ShowLoading();
 
                 this.HttpHelper.Post("Query/Save", postClass).then((data: DtoResultObj<any>) => {
                   Fun.HideLoading();
                   console.log(data)
-                  if (data.IsSuccess) {
+                  if (data.success) {
                     this.source.refresh()
                   }
                   else {
-                    Fun.Hint(data.Msg)
+                    Fun.Hint(data.msg)
                   }
                   resolve(data);
                 });
@@ -209,7 +209,7 @@ export class QuartzTaskListPage implements OnInit {
       postClass.Key = event.data.ID;
       this.HttpHelper.Post("QuartzTask/RemoveJob", postClass).then((data: DtoResult) => {
         Fun.HideLoading()
-        if (data.IsSuccess) {
+        if (data.success) {
           this.source.refresh()
         }
       });

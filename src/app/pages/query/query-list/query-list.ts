@@ -219,12 +219,12 @@ export class QueryListPage implements OnInit {
     await Fun.ShowLoading();
     this.HttpHelper.Post("Query/Single", { Key: event.data.ID }).then(async (x: DtoResultObj<any>) => {
       await Fun.HideLoading()
-      if (x.IsSuccess) {
+      if (x.success) {
         let title = "修改模块";
         if (event.data != null) {
           title = "添加模块"
         }
-        this.OpenEditWindow(title, x.Data)
+        this.OpenEditWindow(title, x.data)
       }
     })
 
@@ -250,18 +250,18 @@ export class QueryListPage implements OnInit {
               console.log(x);
               if (window.confirm('确定要保存吗？')) {
                 let postClass: DtoSaveObj<any> = new DtoSaveObj<any>();
-                postClass.Data = x;
+                postClass.data = x;
                 postClass.SaveFieldList = Fun.GetBeanNameStr(x);
                 await Fun.ShowLoading();
 
                 this.HttpHelper.Post("Query/Save", postClass).then((data: DtoResultObj<any>) => {
                   Fun.HideLoading();
                   console.log(data)
-                  if (data.IsSuccess) {
+                  if (data.success) {
                     this.source.refresh()
                   }
                   else {
-                    Fun.Hint(data.Msg)
+                    Fun.Hint(data.msg)
                   }
                   resolve(data);
                 });
@@ -287,7 +287,7 @@ export class QueryListPage implements OnInit {
       postClass.Key = event.data.ID;
       this.HttpHelper.Post("Query/Delete", postClass).then((data: DtoResult) => {
         Fun.HideLoading()
-        if (data.IsSuccess) {
+        if (data.success) {
           this.source.refresh()
         }
       });

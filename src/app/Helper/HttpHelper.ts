@@ -61,16 +61,16 @@ export class HttpHelper {
           console.groupEnd();
 
           var errObj: DtoResultObj<any> = new DtoResultObj<any>();
-          errObj.IsSuccess = false;
+          errObj.success = false;
           switch (error.status) {
             case 401:
-              errObj.Msg = "登录超时,请重新登录";
+              errObj.msg = "登录超时,请重新登录";
               break;
             case 0:
-              errObj.Msg = "请检查网络";
+              errObj.msg = "请检查网络";
               break;
             default:
-              errObj.Msg = error.message;
+              errObj.msg = error.message;
               break;
           }
           resolve(errObj);
@@ -80,8 +80,8 @@ export class HttpHelper {
           console.error(error);
 
           var errObj: DtoResultObj<any> = new DtoResultObj<any>();
-          errObj.IsSuccess = false;
-          errObj.Msg = error.message;
+          errObj.success = false;
+          errObj.msg = error.message;
           resolve(errObj);
         });
     });
@@ -124,8 +124,8 @@ export class HttpHelper {
           console.error('请求失败');
           console.error(err);
           var errObj: DtoResultObj<any> = new DtoResultObj<any>();
-          errObj.IsSuccess = false;
-          errObj.Msg = err.message;
+          errObj.success = false;
+          errObj.msg = err.message;
           Fun.HideLoading();
           observer.next(errObj);
           observer.complete();

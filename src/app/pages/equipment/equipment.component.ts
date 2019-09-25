@@ -47,12 +47,12 @@ export class EquipmentComponent  implements OnInit {
 
   LoadModule() {
     this.httpHelper.Post("Equipment/GetTree", null).then((x: DtoResultObj<any>) => {
-      if(!x.IsSuccess){
-        Fun.Hint(x.Msg);
+      if(!x.success){
+        Fun.Hint(x.msg);
         return;
       }
-      this.nodes=x.DataList;
-      // let nowMenu = this.JsonToMenuItemJson(x.DataList)
+      this.nodes=x.dataList;
+      // let nowMenu = this.JsonToMenuItemJson(x.dataList)
       // var frist:NbMenuItem[]=[{
       //   title: "首页",
       //   icon: 'nb-e-commerce',

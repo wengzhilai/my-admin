@@ -2,7 +2,7 @@ export class DtoSaveObj<T> {
     /**
      * 保存的对像
      */
-    Data:T
+    data:T
     /**
      * 保存的字段
      */

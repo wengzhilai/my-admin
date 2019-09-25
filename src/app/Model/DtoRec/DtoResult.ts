@@ -2,15 +2,15 @@ export class DtoResult {
     /**
      * 是否成功
      */
-    IsSuccess:boolean;
+    success:boolean;
     /**
      * 返回代码
      */
-    Code:string;
+    code:string;
     /**
      * 返回描述
      */
-    Msg:string;
+    msg:string;
 }
 
 export class DtoResultObj<T> extends DtoResult {
@@ -19,9 +19,9 @@ export class DtoResultObj<T> extends DtoResult {
     /**
      * 数据
      */
-    Data:T;
+    data:T;
     /**
      * 数据列表
      */
-    DataList:T[];
+    dataList:T[];
 }

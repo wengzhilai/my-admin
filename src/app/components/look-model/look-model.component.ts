@@ -37,7 +37,7 @@ export class LookModelComponent implements OnInit {
     even(this.bean)
       .then((x: DtoResultObj<any>) => {
         console.log(x)
-        if (x.IsSuccess) {
+        if (x.success) {
           this.windowRef.close();
         }
       })

@@ -52,15 +52,16 @@ export class AuthLoginPage {
       }
       //认证登录
       await Fun.ShowLoading();
-      this.httpHelper.Post("Auth/UserLogin", this.userForm.value).then((result: DtoResultObj<UserDto>) => {
+      GlobalHelper.SetToken(null);
+      this.httpHelper.Post("user/Login/userLogin", this.userForm.value).then((result: DtoResultObj<UserDto>) => {
         Fun.HideLoading();
-        if (result.IsSuccess) {
-          GlobalHelper.SetToken(result.Code)
-          GlobalHelper.SetUserObject(result.Data)
+        if (result.success) {
+          GlobalHelper.SetToken(result.code)
+          GlobalHelper.SetUserObject(result.data)
           this.router.navigateByUrl("pages");
         }
         else {
-          Fun.Hint(result.Msg);
+          Fun.Hint(result.msg);
         }
         console.log(result);
       })

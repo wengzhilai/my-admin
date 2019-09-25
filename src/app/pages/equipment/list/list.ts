@@ -73,12 +73,12 @@ export class EquipmentListComponent implements OnInit {
     await Fun.ShowLoading();
     return this.HttpHelper.Post("Equipment/GetConfig", postEnt).then((data: DtoResultObj<any>) => {
       Fun.HideLoading();
-      if (data.IsSuccess) {
+      if (data.success) {
         //显示table
         this.LoadSetting = true;
 
         this.configJson = {};
-        var cfgJsonList: Array<any> = data.Data.ColumnsList;
+        var cfgJsonList: Array<any> = data.data.ColumnsList;
         this.clmNum = 0;
         cfgJsonList.forEach((element: any) => {
           console.log(element);
@@ -145,13 +145,13 @@ export class EquipmentListComponent implements OnInit {
     this.GetBean(defaultData, readUrl).then((x: DtoResultObj<any>) => {
       Fun.HideLoading();
       console.log(x);
-      if (x == null || !x.IsSuccess) {
+      if (x == null || !x.success) {
         console.log("获取取初始值失败")
         //如果获取取初始值失败，则用列表数据
-        x.Data = defaultData;
+        x.data = defaultData;
       }
       console.log("获取取初始值")
-      console.log(x.Data)
+      console.log(x.data)
 
       let title = "修改"
       if (defaultData != null) {
@@ -161,7 +161,7 @@ export class EquipmentListComponent implements OnInit {
         windowClass: "DivWindow",
         title: title,
         context: {
-          bean: x.Data,
+          bean: x.data,
           inputs: this.configJson,
           buttons: [{
             name: "确定", click: (x) => {
@@ -169,7 +169,7 @@ export class EquipmentListComponent implements OnInit {
                 console.log(x);
                 if (window.confirm('确定要保存吗？')) {
                   let postClass: any = {};
-                  postClass.DataStr = JSON.stringify(x);
+                  postClass.dataStr = JSON.stringify(x);
                   postClass.TypeId = this.code
                   if (defaultData == null || defaultData.Id == null) {
                     apiUrl = "Equipment/SaveEquiment";
@@ -184,11 +184,11 @@ export class EquipmentListComponent implements OnInit {
                   this.HttpHelper.Post(apiUrl, postClass).then((data: DtoResultObj<any>) => {
                     Fun.HideLoading();
                     console.log(data)
-                    if (data.IsSuccess) {
+                    if (data.success) {
                       this.source.refresh()
                     }
                     else {
-                      Fun.Hint(data.Msg)
+                      Fun.Hint(data.msg)
                     }
                     resolve(data);
                   });
@@ -244,11 +244,11 @@ export class EquipmentListComponent implements OnInit {
       this.HttpHelper.Post(apiUrl, { Id: Key, TypeId: this.code }).then((data: DtoResultObj<any>) => {
         Fun.HideLoading()
         console.log(data)
-        if (data.IsSuccess) {
+        if (data.success) {
           this.source.refresh()
         }
         else {
-          Fun.Hint(data.Msg)
+          Fun.Hint(data.msg)
         }
       });
     }
