@@ -39,7 +39,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   currentTheme = 'default';
 
-  userMenu = [{ title: Fun.LanguageStr("Theme.Profile"),link:"user/Profile" }, { title: Fun.LanguageStr("Theme.LoginOut"),url:"#/auth/login" }];
+  userMenu = [{ title: Fun.LanguageStr("Theme.Profile"),link:"user/Profile" }, { title: Fun.LanguageStr("Theme.LoginOut"),url:"/auth/login" }];
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,

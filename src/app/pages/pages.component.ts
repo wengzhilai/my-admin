@@ -76,7 +76,7 @@ export class PagesComponent implements OnInit {
         link: url.split('?')[0],
         queryParams: Fun.UrlToJosn(url),
         home:true,
-        children: this.JsonToMenuItemJson(element["Children"])
+        children: this.JsonToMenuItemJson(element["children"])
       })
     });
     if (reArr.length == 0) reArr = null;
