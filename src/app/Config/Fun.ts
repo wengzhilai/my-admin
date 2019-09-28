@@ -101,6 +101,7 @@ export class Fun {
             obj[i.split('=')[0]] = i.split('=')[1];  //对数组每项用=分解开，=前为对象属性名，=后为属性值
         }
         console.log(obj);
+        return obj;
     }
 
 

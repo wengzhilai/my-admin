@@ -66,7 +66,7 @@ export class PagesComponent implements OnInit {
   JsonToMenuItemJson(inJson: any[]) {
     let reArr: NbMenuItem[] = []
     inJson.forEach(element => {
-      let url:String=element["location"]
+      let url:string=element["location"]
       console.log(url)
       if(url==null) url="";
       reArr.unshift({
@@ -74,6 +74,7 @@ export class PagesComponent implements OnInit {
         title: element["name"],
         icon: element["imageUrl"],
         link: url.split('?')[0],
+        // link: url.split('?')[0],
         queryParams: Fun.UrlToJosn(url),
         home:true,
         children: this.JsonToMenuItemJson(element["children"])
