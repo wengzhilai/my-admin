@@ -284,8 +284,8 @@ export class QueryListPage implements OnInit {
     if (window.confirm('确定要删除吗?')) {
       Fun.ShowLoading();
       let postClass: DtoDo = new DtoDo();
-      postClass.Key = event.data.ID;
-      this.HttpHelper.Post("Query/Delete", postClass).then((data: DtoResult) => {
+      postClass.key = event.data.ID;
+      this.HttpHelper.Post("user/query/delete", postClass).then((data: DtoResult) => {
         Fun.HideLoading()
         if (data.success) {
           this.source.refresh()

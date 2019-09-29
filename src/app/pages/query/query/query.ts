@@ -269,7 +269,7 @@ export class QueryQueryComponent implements OnInit {
     if (window.confirm(confirmTip)) {
       await Fun.ShowLoading();
       let postClass: DtoDo = new DtoDo();
-      postClass.Key = Key;
+      postClass.key = Key;
       this.HttpHelper.Post(apiUrl, postClass).then((data: DtoResultObj<any>) => {
         Fun.HideLoading()
         console.log(data)
@@ -299,11 +299,11 @@ export class QueryQueryComponent implements OnInit {
    */
   GetBean(defaultData = null, readUrl = null): Promise<any> {
     if (readUrl != null && defaultData!=null && defaultData.ID !=null) {
-      return this.HttpHelper.Post(readUrl, { Key: defaultData.ID })
+      return this.HttpHelper.Post(readUrl, { key: defaultData.ID })
     }
     else {
       if (defaultData == null) defaultData = {}
-      return new Promise((resolve, rejeact) => { resolve({ "IsSuccess": true, "Data": defaultData }) });
+      return new Promise((resolve, rejeact) => { resolve({ "success": true, "data": defaultData }) });
     }
   }
 
