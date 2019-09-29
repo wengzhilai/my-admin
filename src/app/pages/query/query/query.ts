@@ -60,37 +60,19 @@ export class QueryQueryComponent implements OnInit {
   ) {
   }
   ngOnInit() {
-    // this.CheckUrl();
     this.routerIonfo.queryParams.subscribe(params => {
       this.code = params['code'];
+      console.log(params)
       this.LoadData();
     });
   }
 
 
-  /** 用于检测URL地址是否改变，如已经变则刷新该页面 */
-  // CheckUrl() {
-
-  //   setTimeout(() => {
-  //     if (window.location.href.indexOf("/pages/query/query?") > -1) {
-  //       if (window.location.href != this.thisUrl) {
-  //         this.thisUrl = window.location.href
-  //         this.code = this.routerIonfo.snapshot.queryParams["code"];
-  //         this.LoadData().then(x => {
-  //           this.CheckUrl()
-  //         })
-  //       }
-  //       else {
-  //         this.CheckUrl()
-  //       }
-  //     }
-  //   }, 1000)
-  // }
   LoadData() {
     //隐藏table，在显示的时候，才会刷新列数据
     this.LoadSetting = false;
-    let postEnt = { Key: this.code }
-    return this.HttpHelper.Post("query/GetSingleQuery", postEnt).then((data: DtoResultObj<any>) => {
+    let postEnt = { key: this.code }
+    return this.HttpHelper.Post("user/query/GetSingleQuery", postEnt).then((data: DtoResultObj<any>) => {
       if (data.success) {
         //显示table
         this.LoadSetting = true;
@@ -99,7 +81,7 @@ export class QueryQueryComponent implements OnInit {
         //隐藏，hide=true的字段
         let t: any = {}
         //设置列配置
-        eval("t=" + this.queryEnt.QUERY_CFG_JSON)
+        eval("t=" + this.queryEnt.queryCfgJson)
         this.configJson = t
         for (const key in this.configJson) {
           this.clmNum++;
@@ -107,11 +89,11 @@ export class QueryQueryComponent implements OnInit {
         this.clmNum += 2;
 
         //设置表头按钮配置
-        eval("t=" + this.queryEnt.HEARD_BTN)
+        eval("t=" + this.queryEnt.heardBtn)
         this.headBtnSet = t
         //读取行按钮
         try {
-          eval("t=" + this.queryEnt.ROWS_BTN)
+          eval("t=" + this.queryEnt.rowsBtn)
           this.rowBtnSet = t
         } catch (error) {
 
@@ -127,7 +109,7 @@ export class QueryQueryComponent implements OnInit {
         this.settings.columns = tempCol
         this.LoadSetting = true
         //配置是否有筛选框
-        if (this.queryEnt.SHOW_CHECKBOX != 1) {
+        if (this.queryEnt.showCheckbox != 1) {
           this.settings.selectMode = "single"
         }
 
@@ -141,7 +123,7 @@ export class QueryQueryComponent implements OnInit {
         }
 
         let smartTableCofnig: ServerSourceConf = new ServerSourceConf();
-        smartTableCofnig.endPoint = 'Query/GetBindListData';
+        smartTableCofnig.endPoint = 'user/query/getListData';
         smartTableCofnig.dataKey = "code"
 
         
@@ -158,10 +140,10 @@ export class QueryQueryComponent implements OnInit {
   }
 
   AddHeadBtn() {
-    setTimeout(() => {
-      var table = this.container.element.nativeElement.children[0];
-      this.renderer.appendChild(table, this.template.nativeElement)
-    }, 100);
+    // setTimeout(() => {
+    //   var table = this.container.element.nativeElement.children[0];
+    //   this.renderer.appendChild(table, this.template.nativeElement)
+    // }, 100);
   }
 
   userRowSelect(event) {
@@ -250,7 +232,7 @@ export class QueryQueryComponent implements OnInit {
 
 
     var link = document.createElement("a");
-    link.setAttribute("href", Variables.Api + "Query/DownFile?code=" + this.code);
+    link.setAttribute("href", Variables.Api + "user/query/DownFile?code=" + this.code);
     link.style.visibility = 'hidden';
     document.body.appendChild(link);
     link.click();

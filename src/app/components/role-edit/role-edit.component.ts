@@ -65,7 +65,7 @@ export class RoleEditComponent implements OnInit {
   }
 
   LoadModule() {
-    this.httpHelper.Post("Module/GetUserMenu", null).then((x: DtoResultObj<any>) => {
+    this.httpHelper.Post("user/module/getUserMenu", null).then((x: DtoResultObj<any>) => {
       this.nodes = x.dataList;
       console.log(this.bean)
       this.bean["moduleIdStr"].forEach(element => {
