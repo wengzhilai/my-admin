@@ -185,9 +185,9 @@ export class QueryQueryComponent implements OnInit {
         title = "添加"
       }
       let thisOpenMode=this.GetComponents(openModal);
-      console.log(thisOpenMode);
+      // console.log(thisOpenMode);
       console.log(x.data);
-      console.log(this.configJson);
+      // console.log(this.configJson);
       this.windowService.open(thisOpenMode, {
         windowClass: "DivWindow",
         title: title,
@@ -198,10 +198,12 @@ export class QueryQueryComponent implements OnInit {
             name: "确定", click: (x) => {
               return new Promise(async (resolve, reject) => {
                 console.log(x);
+                console.log(this.configJson);
+                console.log(Fun.GetBeanNameStr(x,this.configJson));
                 if (window.confirm('确定要保存吗？')) {
                   let postClass: DtoSaveObj<any> = new DtoSaveObj<any>();
                   postClass.data = x;
-                  postClass.SaveFieldList = Fun.GetBeanNameStr(x);
+                  postClass.saveFieldList = Fun.GetBeanNameStr(x,this.configJson);
                   await Fun.ShowLoading();
 
                   this.HttpHelper.Post(apiUrl, postClass).then((data: DtoResultObj<any>) => {
@@ -248,7 +250,7 @@ export class QueryQueryComponent implements OnInit {
   onDelete(event): void {
 
     if (this.rowBtnSet.length > 1) {
-      this.DeleteApi(this.rowBtnSet[1].apiUrl, event.data.ID, this.rowBtnSet[1].confirmTip)
+      this.DeleteApi(this.rowBtnSet[1].apiUrl, event.data.id, this.rowBtnSet[1].confirmTip)
     }
 
   }
@@ -298,8 +300,8 @@ export class QueryQueryComponent implements OnInit {
    * @param readUrl 加载的URL
    */
   GetBean(defaultData = null, readUrl = null): Promise<any> {
-    if (readUrl != null && defaultData!=null && defaultData.ID !=null) {
-      return this.HttpHelper.Post(readUrl, { key: defaultData.ID })
+    if (readUrl != null && defaultData!=null && defaultData.id !=null) {
+      return this.HttpHelper.Post(readUrl, { key: defaultData.id })
     }
     else {
       if (defaultData == null) defaultData = {}

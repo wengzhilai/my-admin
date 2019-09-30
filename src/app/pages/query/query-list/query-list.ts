@@ -217,7 +217,7 @@ export class QueryListPage implements OnInit {
     console.log(event.data)
     //先根据ID找到对象
     await Fun.ShowLoading();
-    this.HttpHelper.Post("Query/Single", { Key: event.data.ID }).then(async (x: DtoResultObj<any>) => {
+    this.HttpHelper.Post("user/query/singleByKey", { Key: event.data.id }).then(async (x: DtoResultObj<any>) => {
       await Fun.HideLoading()
       if (x.success) {
         let title = "修改模块";
@@ -251,10 +251,10 @@ export class QueryListPage implements OnInit {
               if (window.confirm('确定要保存吗？')) {
                 let postClass: DtoSaveObj<any> = new DtoSaveObj<any>();
                 postClass.data = x;
-                postClass.SaveFieldList = Fun.GetBeanNameStr(x);
+                postClass.saveFieldList = Fun.GetBeanNameStr(x,null);
                 await Fun.ShowLoading();
 
-                this.HttpHelper.Post("Query/Save", postClass).then((data: DtoResultObj<any>) => {
+                this.HttpHelper.Post("user/query/save", postClass).then((data: DtoResultObj<any>) => {
                   Fun.HideLoading();
                   console.log(data)
                   if (data.success) {

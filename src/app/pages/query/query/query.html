@@ -1,12 +1,12 @@
 <nb-card style="overflow-x:auto;overflow-y:hidden">
   <nb-card-header>
-    {{queryEnt.NAME}}
+    {{queryEnt.name}}
   </nb-card-header>
 
   <nb-card-body>
     <div>
       <div class="alert alert-primary">
-        {{queryEnt.REMARK}}
+        {{queryEnt.remark}}
         <span class="float-right">
           <i (click)="ReLoad()" class="nb-loop"></i>
           <i (click)="ShowMore=(!ShowMore)" class="ion-arrow-resize {{ ShowMore==true?'txtGray':''}}"></i>

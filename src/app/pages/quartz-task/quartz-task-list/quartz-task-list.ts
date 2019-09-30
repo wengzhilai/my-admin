@@ -173,7 +173,7 @@ export class QuartzTaskListPage implements OnInit {
               if (window.confirm('确定要保存吗？')) {
                 let postClass: DtoSaveObj<any> = new DtoSaveObj<any>();
                 postClass.data = x;
-                postClass.SaveFieldList = Fun.GetBeanNameStr(x);
+                postClass.saveFieldList = Fun.GetBeanNameStr(x,null);
                 await Fun.ShowLoading();
 
                 this.HttpHelper.Post("Query/Save", postClass).then((data: DtoResultObj<any>) => {

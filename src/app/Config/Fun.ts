@@ -569,14 +569,15 @@ export class Fun {
     }
 
 
-    /**
+ /**
  * 获取类的所有属性
  * 
  * @param {any} bean 传入的类
+ * @param {any} cfg {id:{editable:false}}读取配置是否可以编辑
  * @returns 返回类的所有字段的字符串，以逗号分隔
  * @memberof CommonService
  */
-    public static GetBeanNameStr(bean) {
+    public static GetBeanNameStr(bean: any,cfg: any) {
         var tmpArr = [];
         for (var item in bean) {
             var objV = bean[item];
@@ -584,6 +585,17 @@ export class Fun {
                 tmpArr.push(item);
             }
         }
+        if(cfg!=null)
+        {
+            for (let index = 0; index < tmpArr.length; index++) {
+                const element = tmpArr[index];
+                if(cfg[element]!=null && cfg[element]["editable"]!=null && cfg[element]["editable"]==false){
+                    tmpArr.splice(index,1);
+                }
+            }
+ 
+        }
+        
         return tmpArr;
     }
 

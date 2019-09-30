@@ -6,18 +6,18 @@
     <div class="row show-grid">
       <div class="col-md-4">
         <div class="form-group">
-          <label>{{inputs['NAME'].title}}</label>
-          <input [(ngModel)]="bean[inputs['NAME'].name]" type="text" class="form-control"
-            placeholder="{{inputs['NAME'].placeholder}}">
+          <label>{{inputs['name'].title}}</label>
+          <input [(ngModel)]="bean[inputs['name'].name]" type="text" style="width: 100%" class="form-control"
+            placeholder="{{inputs['name'].placeholder}}">
         </div>
       </div>
     </div>
     <div class="row show-grid">
       <div class="col-md-12">
         <div class="form-group">
-          <label>{{inputs['REMARK'].title}}</label>
-          <textarea [(ngModel)]="bean[inputs['REMARK'].name]" rows="4"
-            placeholder="{{inputs['REMARK'].placeholder}}" class="form-control"></textarea>
+          <label>{{inputs['remark'].title}}</label>
+          <textarea [(ngModel)]="bean[inputs['remark'].name]" rows="4"
+            placeholder="{{inputs['remark'].placeholder}}" class="form-control"></textarea>
         </div>
       </div>
     </div>

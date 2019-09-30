@@ -26,9 +26,9 @@ export class RoleEditComponent implements OnInit {
   /** 配置 */
   options: ITreeOptions = {
     useCheckbox: true,
-    childrenField: "Children",
-    displayField: "NAME",
-    idField: "ID",
+    childrenField: "children",
+    displayField: "name",
+    idField: "id",
 
   };
   moduleIdStr;
@@ -68,9 +68,11 @@ export class RoleEditComponent implements OnInit {
     this.httpHelper.Post("user/module/getUserMenu", null).then((x: DtoResultObj<any>) => {
       this.nodes = x.dataList;
       console.log(this.bean)
-      this.bean["moduleIdStr"].forEach(element => {
-        this.tree.treeModel.selectedLeafNodeIds[element] = true
-      });
+      if (this.bean["moduleIdStr"] != null) {
+        this.bean["moduleIdStr"].forEach(element => {
+          this.tree.treeModel.selectedLeafNodeIds[element] = true
+        });
+      }
     });
   }
   onSelect(obj) {
