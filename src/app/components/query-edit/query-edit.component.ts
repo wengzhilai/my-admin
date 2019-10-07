@@ -28,7 +28,9 @@ export class QueryEditComponent implements OnInit {
   ngOnInit() {
     for (const key in this.inputs) {
       let element = this.inputs[key];
-      element["name"]=key
+      if(element["name"]==null){
+        element["name"]=key
+      }
       this.ItmeArr.push(element);
     }
     console.log(this.ItmeArr)

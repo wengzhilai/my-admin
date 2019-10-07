@@ -30,29 +30,34 @@ export class QueryListPage implements OnInit {
     private renderer: Renderer2
   ) {
     let smartTableCofnig: ServerSourceConf = new ServerSourceConf();
-    smartTableCofnig.endPoint = 'Query/List';
-    smartTableCofnig.pagerLimitKey = ""
-    this.source = new SmartTableDataSource(this.HttpHelper, smartTableCofnig);
+    smartTableCofnig.endPoint = 'user/query/getListData';
+        smartTableCofnig.dataKey = "code"
+        smartTableCofnig.pagerLimitKey = ""
+    this.source = new SmartTableDataSource(this.HttpHelper, smartTableCofnig,"query");
     this.configJson = {
       "ID": {
         "title": '查询ID',
         "type": 'number',
         "filter": false,
-        "editable": false
+        "editable": false,
+        "name":"id",
       },
       "NAME": {
         "title": '查询名',
         "filter": true,
-        "type": 'string'
+        "type": 'string',
+        "name":"name",
       },
       "CODE": {
         "title": '代码',
-        "type": 'string'
+        "type": 'string',
+        "name":"code",
       },
       "AUTO_LOAD": {
         "title": '自动加载',
         "defaultValue": 1,
         "type": 'string',
+        "name":"autoLoad",
         "editor": {
           "type": 'list',
           "config": {
@@ -66,12 +71,14 @@ export class QueryListPage implements OnInit {
       "PAGE_SIZE": {
         "title": '页面大小',
         "type": 'number',
-        "defaultValue": 10
+        "defaultValue": 10,
+        "name":"pageSize",
       },
       "SHOW_CHECKBOX": {
         "title": '允许多选',
         "type": 'string',
         "defaultValue": 1,
+        "name":"showCheckbox",
         "editor": {
           "type": 'list',
           "config": {
@@ -86,6 +93,7 @@ export class QueryListPage implements OnInit {
         "title": '是否隐藏',
         "type": 'string',
         "defaultValue": 1,
+        "name":"isDebug",
         "editor": {
           "type": 'list',
           "config": {
@@ -99,15 +107,18 @@ export class QueryListPage implements OnInit {
       "FILTR_LEVEL": {
         "title": '过滤层级',
         "type": 'number',
-        "defaultValue": 1
+        "defaultValue": 1,
+        "name":"filterLevel",
       },
       "DESKTOP_ROLE": {
         "title": '是否首页显示',
-        "type": 'string'
+        "type": 'string',
+        "name":"desktopRole",
       },
       "NEW_DATA": {
         "title": '输入的时间',
-        "type": 'string'
+        "type": 'string',
+        "name":"newData",
       },
       "QUERY_CONF": {
         "title": '查询脚本',
@@ -115,6 +126,7 @@ export class QueryListPage implements OnInit {
         "inputWidth": 12,
         "isTabs": true,
         "hide": true,
+        "name":"queryConf",
         "editor": {
           "type": 'textarea'
         }
@@ -125,6 +137,7 @@ export class QueryListPage implements OnInit {
         "isTabs": true,
         "hide": true,
         "inputWidth": 12,
+        "name":"queryCfgJson",
         "editor": {
           "type": 'textarea'
         }
@@ -136,6 +149,7 @@ export class QueryListPage implements OnInit {
         "isTabs": true,
         "hide": true,
         "inputWidth": 12,
+        "name":"inParaJson",
         "editor": {
           "type": 'textarea'
         }
@@ -146,6 +160,7 @@ export class QueryListPage implements OnInit {
         "isTabs": true,
         "hide": true,
         "inputWidth": 12,
+        "name":"jsStr",
         "editor": {
           "type": 'textarea'
         }
@@ -154,12 +169,14 @@ export class QueryListPage implements OnInit {
         "title": '行按钮',
         "isTabs": true,
         "hide": true,
+        "name":"rowsBtn",
         "type": 'string'
       },
       "HEARD_BTN": {
         "title": '表头按钮',
         "isTabs": true,
         "hide": true,
+        "name":"heardBtn",
         "type": 'string'
       },
 
@@ -169,6 +186,7 @@ export class QueryListPage implements OnInit {
         "hide": true,
         "type": 'string',
         "inputWidth": 12,
+        "name":"remark",
         "editor": {
           "type": 'textarea'
         }
@@ -217,7 +235,7 @@ export class QueryListPage implements OnInit {
     console.log(event.data)
     //先根据ID找到对象
     await Fun.ShowLoading();
-    this.HttpHelper.Post("user/query/singleByKey", { Key: event.data.id }).then(async (x: DtoResultObj<any>) => {
+    this.HttpHelper.Post("user/query/singleByKey", { key: event.data.ID }).then(async (x: DtoResultObj<any>) => {
       await Fun.HideLoading()
       if (x.success) {
         let title = "修改模块";
