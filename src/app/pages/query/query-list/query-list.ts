@@ -227,7 +227,7 @@ export class QueryListPage implements OnInit {
    * @param event 添加事件
    */
   async onSave(event): Promise<void> {
-    if (event == null) {
+    if (event == null || event.data==null) {
       this.OpenEditWindow("添加模块", {})
       return;
     }
@@ -235,7 +235,7 @@ export class QueryListPage implements OnInit {
     console.log(event.data)
     //先根据ID找到对象
     await Fun.ShowLoading();
-    this.HttpHelper.Post("user/query/singleByKey", { key: event.data.ID }).then(async (x: DtoResultObj<any>) => {
+    this.HttpHelper.Post("user/query/singleByKey", { key: event.data.id }).then(async (x: DtoResultObj<any>) => {
       await Fun.HideLoading()
       if (x.success) {
         let title = "修改模块";
@@ -302,7 +302,7 @@ export class QueryListPage implements OnInit {
     if (window.confirm('确定要删除吗?')) {
       Fun.ShowLoading();
       let postClass: DtoDo = new DtoDo();
-      postClass.key = event.data.ID;
+      postClass.key = event.data.id;
       this.HttpHelper.Post("user/query/delete", postClass).then((data: DtoResult) => {
         Fun.HideLoading()
         if (data.success) {
