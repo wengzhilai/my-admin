@@ -14,9 +14,14 @@ export class CookiesHelper {
       cookieName = encodeURIComponent(cookieName);
 
       let regexp = new RegExp('(?:^' + cookieName + '|;\\s*' + cookieName + ')=(.*?)(?:;|$)', 'g');
+      // console.log(document.cookie)
       let cookies = regexp.exec(document.cookie);
-
-      return decodeURIComponent(cookies[1]);
+      // console.log(cookies)
+      let restr=decodeURIComponent(cookies[1]);
+      if (restr == null  || restr == ""|| restr == "null") {
+        return '';
+      }
+      return restr;
     }
     else {
       return '';
@@ -68,13 +73,14 @@ export class CookiesHelper {
     if (needsSecureConnection) {
       cookieStr += 'secure;';
     }
-
+    console.log('删除cookie')
+    console.log(cookieStr)
     document.cookie = cookieStr;
   }
 
   public static GetObjectCookie(cookieName: string): object {
     let restr = this.GetCookie(cookieName)
-    if (restr == null || restr == "") {
+    if (restr == null  || restr == ""|| restr == "null") {
       return null;
     }
     return JSON.parse(restr)
@@ -105,12 +111,13 @@ export class CookiesHelper {
 	 */
   public static DeleteCookie(cookieName: string, domain?: string, path?: string) {
 
-    let cookieExists = this.Exists(cookieName);
-
-    // If the cookie exists
-    // if (cookieExists) {
+    for (let index = 0; index < 5; index++) {
+      let cookieExists = this.Exists(cookieName);
+      if (!cookieExists) {
+        break;
+      }
       this.SetCookie(cookieName, '', -1, domain, path);
-    // }
+    }
   }
 
 	/**

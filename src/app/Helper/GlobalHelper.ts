@@ -5,12 +5,8 @@ export class GlobalHelper {
 
 	public static SetToken(token: string) {
 		console.log("保存Token：" + token)
-		if (token == null || token == "") {
-			CookiesHelper.DeleteCookie("token");
-		}
-		else {
-			CookiesHelper.SetCookie("token", token);
-		}
+		CookiesHelper.DeleteCookie("token");
+		CookiesHelper.SetCookie("token", token);
 	}
 
 	public static GetToken() {
