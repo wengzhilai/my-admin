@@ -8,6 +8,7 @@ import { AnalyticsService } from './@core/utils/analytics.service';
 import { Platform, LoadingController, ToastController, AlertController, ModalController } from '@ionic/angular';
 import { TranslateService } from './Lib/ngx-translate/public_api';
 import { Fun } from './Config/Fun';
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 
 @Component({
   selector: 'ngx-app',
@@ -22,8 +23,12 @@ export class AppComponent implements OnInit {
     _alertCtrl: AlertController,
     _translate: TranslateService,
     _modalCtrl: ModalController,
-    ) {
-      Fun.Init(_loadingCtrl, _toastCtrl, platform, _alertCtrl, _translate,_modalCtrl);
+    private localeService: BsLocaleService,
+
+  ) {
+    Fun.Init(_loadingCtrl, _toastCtrl, platform, _alertCtrl, _translate, _modalCtrl);
+    this.localeService.use('zh-cn');
+
   }
 
   ngOnInit(): void {

@@ -22,6 +22,9 @@
               </input-select>
               <textarea *ngSwitchCase="'textarea'" id="input{{i}}" [(ngModel)]="bean[item.name]" rows="3"
                 placeholder="{{item.placeholder}}" class="form-control"></textarea>
+              <input *ngSwitchCase="'Date'" id="input{{i}}" [(ngModel)]="bean[item.name]" class="form-control"
+                  [bsConfig]="item.editor.bsConfig"
+                  bsDatepicker >
 
               <input *ngSwitchDefault id="input{{i}}" [(ngModel)]="bean[item.name]" type="{{item.type}}"
                 class="form-control" placeholder="{{item.placeholder}}">

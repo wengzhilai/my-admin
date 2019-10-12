@@ -14,6 +14,9 @@ import { TableEditComponent } from './table-edit/table-edit.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { LookModelComponent } from './look-model/look-model.component';
 import { QRCodeModule } from '../Lib/angularx-qrcode/QRCodeModule';
+import { BsDatepickerModule } from 'ngx-bootstrap';
+
+
 import {
   NbCheckboxModule,NbTabsetModule,
   NbCardModule
@@ -37,6 +40,7 @@ import {
     TreeModule,
     Ng2SmartTableModule,
     QRCodeModule,
+    BsDatepickerModule.forRoot(),
   ],
   exports: [
     EditModelComponent,

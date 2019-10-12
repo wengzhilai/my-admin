@@ -26,6 +26,12 @@ import { IonicModule } from '@ionic/angular';
 import { ComponentsModule } from './components/components.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { BsDatepickerModule } from 'ngx-bootstrap';
+
+import {defineLocale} from 'ngx-bootstrap/chronos';
+import {zhCnLocale} from 'ngx-bootstrap/locale';
+defineLocale('zh-cn', zhCnLocale);// 日历显示中文
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -52,6 +58,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ComponentsModule,
     IonicModule.forRoot(),
     NgbModule,
+    BsDatepickerModule.forRoot(),
+
   ],
   bootstrap: [AppComponent],
 })

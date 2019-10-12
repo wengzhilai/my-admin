@@ -8,7 +8,7 @@ import { DtoResultObj } from '../../Model/DtoRec/DtoResult';
   styleUrls: ['./edit-model.component.scss']
 })
 export class EditModelComponent implements OnInit {
-
+  
   title: string;
   messageList: any[] = [];
   buttons = []
@@ -20,7 +20,7 @@ export class EditModelComponent implements OnInit {
   bean = {}
   screenheight=document.documentElement.clientHeight-300
   constructor(
-    public windowRef: NbWindowRef
+    public windowRef: NbWindowRef,
   ) {
     console.log(this.windowRef.config.context)
   }
