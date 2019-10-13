@@ -10,8 +10,18 @@ import { Fun } from '../../Config/Fun';
 })
 export class InputSelectComponent implements OnInit {
 
+  /**
+   * 接口地址
+   */
   @Input()
   ApiUrl: string
+
+  /**
+   * 允许多选
+   */
+  @Input()
+  multiple: boolean
+
   @Input()
   PostEnt: any
   /**
@@ -40,10 +50,17 @@ export class InputSelectComponent implements OnInit {
   ListData: any;
   constructor(
     public httpHelper: HttpHelper,
-  ) { }
+  ) { 
+
+  }
 
   ngOnInit() {
+    console.log("input-select的参数")
+    console.log("ApiUrl："+this.ApiUrl);
+    console.log("multiple:"+this.multiple);
+
     this.LoadSelectOption();
+    
   }
 
   LoadSelectOption() {

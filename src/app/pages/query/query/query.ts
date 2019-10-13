@@ -21,8 +21,8 @@ import { TableEditComponent } from '../../../components/table-edit/table-edit.co
   styleUrls: ['./query.scss']
 })
 export class QueryQueryComponent implements OnInit {
-  @ViewChild('samrtTable', {static:true, read: ViewContainerRef }) container: ViewContainerRef;
-  @ViewChild('btnHead',{static:true}) template;
+  @ViewChild('samrtTable', { static: true, read: ViewContainerRef }) container: ViewContainerRef;
+  @ViewChild('btnHead', { static: true }) template;
   source: any;
   queryEnt: any = {
     REMARK: "　"
@@ -51,7 +51,7 @@ export class QueryQueryComponent implements OnInit {
   selectedArr = []
   code: any;
   thisUrl: string = ""
-  ShowMore=true;
+  ShowMore = true;
   constructor(
     private routerIonfo: ActivatedRoute,
     private HttpHelper: HttpHelper,
@@ -126,9 +126,9 @@ export class QueryQueryComponent implements OnInit {
         smartTableCofnig.endPoint = 'user/query/getListData';
         smartTableCofnig.dataKey = "code"
 
-        
+
         this.source = new SmartTableDataSource(this.HttpHelper, smartTableCofnig, this.code);
-        this.source.setting=this.settings;
+        this.source.setting = this.settings;
 
         this.AddHeadBtn()
 
@@ -184,7 +184,7 @@ export class QueryQueryComponent implements OnInit {
       if (defaultData != null) {
         title = "添加"
       }
-      let thisOpenMode=this.GetComponents(openModal);
+      let thisOpenMode = this.GetComponents(openModal);
       // console.log(thisOpenMode);
       console.log(x.data);
       // console.log(this.configJson);
@@ -199,12 +199,26 @@ export class QueryQueryComponent implements OnInit {
               return new Promise(async (resolve, reject) => {
                 console.log(x);
                 console.log(this.configJson);
-                console.log(Fun.GetBeanNameStr(x,this.configJson));
+                console.log(Fun.GetBeanNameStr(x, this.configJson));
+                //更新时间选择器
+                for (const key in x) {
+                  if (x.hasOwnProperty(key)) {
+                    if (typeof (x[key]) == "object" && x[key] instanceof Date) {
+                      if (x[key] != null) {
+                        x[key] = Fun.DateFormat(x[key],"yyyy-MM-dd");
+                      }
+                    }
+                  }
+                }
+                console.log(x);
+
+
                 if (window.confirm('确定要保存吗？')) {
                   let postClass: DtoSaveObj<any> = new DtoSaveObj<any>();
                   postClass.data = x;
-                  postClass.saveFieldList = Fun.GetBeanNameStr(x,this.configJson);
+                  postClass.saveFieldList = Fun.GetBeanNameStr(x, this.configJson);
                   await Fun.ShowLoading();
+
 
                   this.HttpHelper.Post(apiUrl, postClass).then((data: DtoResultObj<any>) => {
                     Fun.HideLoading();
@@ -300,7 +314,7 @@ export class QueryQueryComponent implements OnInit {
    * @param readUrl 加载的URL
    */
   GetBean(defaultData = null, readUrl = null): Promise<any> {
-    if (readUrl != null && defaultData!=null && defaultData.id !=null) {
+    if (readUrl != null && defaultData != null && defaultData.id != null) {
       return this.HttpHelper.Post(readUrl, { key: defaultData.id })
     }
     else {
