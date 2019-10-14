@@ -17,7 +17,7 @@
     <tr #btnHead>
       <td [attr.colspan]="clmNum">
           <div style="float: left;margin-right: 5px;" *ngFor="let item of headBtnSet">
-            <button type="button" class="btn btn-icon btn-primary btn-xs" (click)="HeadBtnClick(this,item.click)">
+            <button type="button" nbButton (click)="HeadBtnClick(this,item.click)">
               <i class="{{item.class}}"></i>
               <span>{{item.title}}</span>
             </button>

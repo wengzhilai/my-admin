@@ -1,9 +1,9 @@
-<select *ngIf="multiple==false" [(ngModel)]="myModel" class="form-control">
-  <option *ngFor="let opt of ListData" value="{{opt.id}}" selected="{{myModel.indexOf(opt.id)>-1}}">{{opt.name}}
+<select *ngIf="multiple==null || multiple==false" [(ngModel)]="myModel" class="form-control">
+  <option *ngFor="let opt of ListData" value="{{opt.id}}" selected="{{myModel!=null && myModel.indexOf(opt.id)>-1}}">{{opt.name}}
   </option>
 </select>
 
-<select *ngIf="multiple==true" [(ngModel)]="myModel" class="form-control" multiple>
-  <option *ngFor="let opt of ListData" value="{{opt.id}}"  selected="{{myModel.indexOf(opt.id)>-1}}">{{opt.name}}
+<select *ngIf="multiple!=null && multiple==true" [(ngModel)]="myModel" class="form-control" multiple>
+  <option *ngFor="let opt of ListData" value="{{opt.id}}"  selected="{{myModel!=null && myModel.indexOf(opt.id)>-1}}">{{opt.name}}
   </option>
 </select>

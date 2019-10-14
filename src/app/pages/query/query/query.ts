@@ -14,6 +14,7 @@ import { EditModelComponent } from '../../../components/edit-model/edit-model.co
 import { RoleEditComponent } from '../../../components/role-edit/role-edit.component';
 import { QueryEditComponent } from '../../../components/query-edit/query-edit.component';
 import { TableEditComponent } from '../../../components/table-edit/table-edit.component'
+import { QueryFilterComponent } from '../../../components/query-filter/query-filter.component';
 
 @Component({
   selector: 'query',
@@ -23,7 +24,7 @@ import { TableEditComponent } from '../../../components/table-edit/table-edit.co
 export class QueryQueryComponent implements OnInit {
   @ViewChild('samrtTable', { static: true, read: ViewContainerRef }) container: ViewContainerRef;
   @ViewChild('btnHead', { static: true }) template;
-  source: any;
+  source: SmartTableDataSource;
   queryEnt: any = {
     REMARK: "　"
   };
@@ -205,7 +206,7 @@ export class QueryQueryComponent implements OnInit {
                   if (x.hasOwnProperty(key)) {
                     if (typeof (x[key]) == "object" && x[key] instanceof Date) {
                       if (x[key] != null) {
-                        x[key] = Fun.DateFormat(x[key],"yyyy-MM-dd");
+                        x[key] = Fun.DateFormat(x[key], "yyyy-MM-dd");
                       }
                     }
                   }
@@ -246,7 +247,6 @@ export class QueryQueryComponent implements OnInit {
   /**导出Excel */
   async onExportXls() {
 
-
     var link = document.createElement("a");
     link.setAttribute("href", Variables.Api + "user/query/DownFile?code=" + this.code);
     link.style.visibility = 'hidden';
@@ -256,7 +256,77 @@ export class QueryQueryComponent implements OnInit {
 
   }
 
+  
+  filterBean: any = {};
+  whereList=[{ value: "值", opType: "类型",fieldType: "字段类型",fieldName:"字段名"}];
+  /**
+   * 打开筛选功能
+   */
+  async OpenFilter() {
 
+    this.windowService.open(QueryFilterComponent, {
+      windowClass: "DivWindow",
+      title: "筛选",
+      context: {
+        bean: this.filterBean,
+        inputs: this.configJson,
+        buttons: [
+          {
+            name: "重置", click: (x) => {
+              return new Promise(async (resolve, reject) => {
+                for (const key in x) {
+                  x[key] = "";
+                }
+
+              });
+            }
+          },
+          {
+            name: "确定", click: (x, cfg) => {
+              return new Promise(async (resolve, reject) => {
+                console.log(x);
+                console.log(cfg);
+                console.log(this.configJson);
+                let whereObj = {};
+                //更新时间选择器
+                this.whereList=[];
+                for (const key in x) {
+                  if (x[key] == null || x[key] == "") {
+                    continue;
+                  }
+                  if (this.configJson[key].filter == null) {
+                    whereObj[key] = x[key];
+                    continue;
+                  }
+                  switch (this.configJson[key].filter.type) {
+                    case "Date":
+                      whereObj[key] = Fun.DateFormat(x[key][0], "yyyy-MM-dd") + "~" + Fun.DateFormat(x[key][1], "yyyy-MM-dd");
+                      break;
+                    default:
+                      whereObj[key] = x[key];
+                      break;
+                  }
+                  this.whereList.push({ value: whereObj[key], opType: this.configJson[key].filter.opTypeValue,fieldType: this.configJson[key].type,fieldName:key});
+                  
+                }
+                this.filterBean = x;
+                console.log(this.filterBean);
+                console.log(whereObj);
+                console.log(this.whereList);
+                resolve({ "success": true });
+                this.ReLoad();
+              });
+            }
+          },
+        ]
+      }
+    });
+  }
+
+  ReLoad() {
+    this.source.whereList=this.whereList
+    this.source.refresh()
+  }
   /**
    * 删除事件
    * @param event 添加事件
@@ -324,9 +394,6 @@ export class QueryQueryComponent implements OnInit {
   }
 
 
-  ReLoad() {
-    this.source.refresh()
-  }
 
 
   GetComponents(name) {

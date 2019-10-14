@@ -32,7 +32,7 @@
       <nb-card-header>Outline Buttons</nb-card-header>
       <nb-card-body>
         <div class="buttons-row">
-          <button *ngFor="let status of statuses" nbButton [status]="status" outline>
+          <button *ngFor="let status of statuses"  [status]="status" nbButton outline>
             {{ status }}
           </button>
           <button disabled nbButton outline>

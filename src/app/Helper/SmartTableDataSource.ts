@@ -13,6 +13,8 @@ export class SmartTableDataSource extends LocalDataSource {
   protected conf: ServerSourceConf;
   protected lastRequestCount: number = 0;
   public setting:any={};
+  // public whereList=[{ value: "值", opType: "类型",fieldType: "字段类型",fieldName:"字段名"}];
+  public whereList=[];
   constructor(
     protected httpHelper: HttpHelper,
     conf: ServerSourceConf | {} = {},
@@ -106,13 +108,19 @@ export class SmartTableDataSource extends LocalDataSource {
       // if (key == "_sort") postBean.sort = [{ Key: vars[0], Value: par.get("_order")[0], Type: "" }]; //排序字段
       if (key.indexOf('_like') > 0) {
         let keyName = key.substr(0, key.indexOf('_like'));
-        if(postBean.WhereList==null){
-          postBean.WhereList=[]
+        if(postBean.whereList==null){
+          postBean.whereList=[]
         }
         var column=this.setting.columns[keyName];
-        postBean.WhereList.push({ ObjFiled: keyName, Value: par.get(key), OpType: "like",FieldType: column["type"],FieldName:keyName}); //排序字段
+        postBean.whereList.push({ value: par.get(key), opType: "like",fieldType: column["type"],fieldName:keyName}); //排序字段
       }
     })
+    this.whereList.forEach(element => {
+      if(postBean.whereList==null){
+        postBean.whereList=[]
+      }
+      postBean.whereList.push(element);
+    });
     postBean.code = this.inKey
     if(postBean.rows==null)postBean.rows=1;
     if(postBean.page==null)postBean.page=10;
@@ -176,6 +184,8 @@ protected addSortRequestParams(httpParams: HttpParams): HttpParams {
     return {
       noDataMessage: "无数据",
       mode: "external",
+      // hideHeader: true,
+      hideSubHeader: true, //隐藏筛选行
       add: {
         addButtonContent: '<i class="nb-plus"></i>',
         createButtonContent: '<i class="nb-checkmark"></i>',
@@ -191,7 +201,7 @@ protected addSortRequestParams(httpParams: HttpParams): HttpParams {
       },
       actions: {
         columnTitle: "操作",
-        add:true,
+        add:false,
         position:'left'
         // position:"right"
       },
