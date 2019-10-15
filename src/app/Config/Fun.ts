@@ -104,6 +104,28 @@ export class Fun {
         return obj;
     }
 
+    public static JosnToUrl(jsonOjb:{}) {
+        var paramStr = "";
+        for (const key in jsonOjb) {
+            const param = jsonOjb[key];
+            if (param instanceof String || param instanceof Number || param instanceof Boolean) {
+                paramStr += "&" + key + "=" + encodeURIComponent(param.toString());
+            } 
+            else if(param instanceof Array) { 
+                for (let index = 0; index < param.length; index++) {
+                    const element = param[index];
+                    var k = key + (param instanceof Array ? "[" + index + "]" : "." + index);
+                    paramStr += '&' + k;
+                }
+            }
+            else{
+
+            }
+        }
+        
+        return paramStr.substr(1);
+    }
+
 
 
     /**

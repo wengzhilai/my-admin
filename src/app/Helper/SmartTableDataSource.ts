@@ -89,15 +89,14 @@ export class SmartTableDataSource extends LocalDataSource {
     return total
   }
 
-  protected requestElements(): Observable<any> {
-    console.log("请求所有数据");
-
+  /**
+   * 获取提交参数
+   */
+  public getPostEnt(){
     let allPar = this.createRequesParams();
     let par = allPar
     console.log(par)
     let postBean: any = {};
-
-    
     postBean.sort=par.get("_sort");
     postBean.order=par.get("_order");
     postBean.rows=par.get("_limit");
@@ -105,7 +104,6 @@ export class SmartTableDataSource extends LocalDataSource {
     par.keys().forEach((key,num) => {
       console.log(key)
       console.log(num)
-      // if (key == "_sort") postBean.sort = [{ Key: vars[0], Value: par.get("_order")[0], Type: "" }]; //排序字段
       if (key.indexOf('_like') > 0) {
         let keyName = key.substr(0, key.indexOf('_like'));
         if(postBean.whereList==null){
@@ -124,6 +122,12 @@ export class SmartTableDataSource extends LocalDataSource {
     postBean.code = this.inKey
     if(postBean.rows==null)postBean.rows=1;
     if(postBean.page==null)postBean.page=10;
+    return postBean;
+  }
+
+  protected requestElements(): Observable<any> {
+    console.log("请求所有数据");
+    let postBean: any = this.getPostEnt();
     return this.httpHelper.PostToObservable(this.conf.endPoint, postBean).pipe(x => {
       return x
     })
