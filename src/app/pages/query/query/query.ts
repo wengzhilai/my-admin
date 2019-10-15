@@ -248,7 +248,7 @@ export class QueryQueryComponent implements OnInit {
   async onExportXls() {
 
     var link = document.createElement("a");
-    link.setAttribute("href", Variables.Api + "user/query/DownFile?code=" + this.code);
+    link.setAttribute("href", Variables.Api + "user/query/downFile?key=" + this.code);
     link.style.visibility = 'hidden';
     document.body.appendChild(link);
     link.click();
