@@ -29,6 +29,7 @@ import {
   NbSelectModule,
   NbUserModule,
 } from '@nebular/theme';
+import { FileUploadModule } from '../Lib/ng2-file-upload';
 
 
 @NgModule({
@@ -56,6 +57,7 @@ import {
     Ng2SmartTableModule,
     QRCodeModule,
     BsDatepickerModule.forRoot(),
+    FileUploadModule,
   ],
   exports: [
     EditModelComponent,

@@ -248,8 +248,8 @@ export class QueryQueryComponent implements OnInit {
   async onExportXls() {
 
     var link = document.createElement("a");
-    var urlPar=Fun.JosnToUrl(this.source.getPostEnt());
-    link.setAttribute("href", Variables.Api + "user/query/downFile?" + urlPar);
+    var urlPar=JSON.stringify(this.source.getPostEnt());
+    link.setAttribute("href", Variables.Api + "user/query/downFile?postJson=" + encodeURIComponent(urlPar));
     link.style.visibility = 'hidden';
     document.body.appendChild(link);
     link.click();
