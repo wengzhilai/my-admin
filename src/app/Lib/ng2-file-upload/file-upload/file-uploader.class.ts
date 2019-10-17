@@ -336,12 +336,24 @@ export class FileUploader {
       let progress = Math.round(event.lengthComputable ? event.loaded * 100 / event.total : 0);
       this._onProgressItem(item, progress);
     };
+    /**
+     * 上传成功
+     */
     xhr.onload = () => {
       let headers = this._parseHeaders(xhr.getAllResponseHeaders());
       let response = this._transformResponse(xhr.response, headers);
       let gist = this._isSuccessCode(xhr.status) ? 'Success' : 'Error';
       let method = '_on' + gist + 'Item';
-      (this as any)[ method ](item, response, xhr.status, headers);
+      console.log("下面是上传成功的返回值");
+      console.log(response);
+      var jsObj=JSON.parse(response);
+      if(jsObj.success && this._isSuccessCode(xhr.status)){
+        this._onSuccessItem(item, response, xhr.status, headers);
+      }
+      else{
+        alert("上传失败："+jsObj.msg);
+        this._onErrorItem(item, response, xhr.status, headers);
+      }
       this._onCompleteItem(item, response, xhr.status, headers);
     };
     xhr.onerror = () => {

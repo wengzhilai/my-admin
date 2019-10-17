@@ -259,7 +259,8 @@ export class QueryQueryComponent implements OnInit {
 
   
   filterBean: any = {};
-  whereList=[{ value: "值", opType: "类型",fieldType: "字段类型",fieldName:"字段名"}];
+  // whereList=[{ value: "值", opType: "类型",fieldType: "字段类型",fieldName:"字段名"}];
+  whereList=[];
   /**
    * 打开筛选功能
    */

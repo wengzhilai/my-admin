@@ -30,11 +30,12 @@ import {
   NbUserModule,
 } from '@nebular/theme';
 import { FileUploadModule } from '../Lib/ng2-file-upload';
+import { UpSinglePicComponent } from './up-single-pic/up-single-pic.component';
 
 
 @NgModule({
-  entryComponents: [EditModelComponent, QueryEditComponent, RoleEditComponent, TableEditComponent,LookModelComponent,QueryFilterComponent],
-  declarations: [EditModelComponent, QueryEditComponent, RoleEditComponent, InputSelectComponent, TableEditComponent, LookModelComponent,QueryFilterComponent],
+  entryComponents: [EditModelComponent, QueryEditComponent, RoleEditComponent, TableEditComponent,LookModelComponent,QueryFilterComponent,UpSinglePicComponent],
+  declarations: [EditModelComponent, QueryEditComponent, RoleEditComponent, InputSelectComponent, TableEditComponent, LookModelComponent,QueryFilterComponent,UpSinglePicComponent],
   imports: [
     IonicModule,
     TranslateModule,
@@ -66,6 +67,7 @@ import { FileUploadModule } from '../Lib/ng2-file-upload';
     TableEditComponent,
     LookModelComponent,
     QueryFilterComponent,
+    UpSinglePicComponent,
   ]
 })
 export class ComponentsModule { }

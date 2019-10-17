@@ -25,7 +25,7 @@
               <input *ngSwitchCase="'Date'" id="input{{i}}" [(ngModel)]="bean[item.name]" class="form-control"
                   [bsConfig]="item.editor.bsConfig"
                   bsDatepicker >
-              <up-file *ngSwitchCase="'file'" [(myModel)]="bean[item.name]" [CanEdit]="true"></up-file>
+              <ngx-up-single-pic *ngSwitchCase="'file'" [(myModel)]="bean[item.name]" [pathType]="'userIcon'" [CanEdit]="true"></ngx-up-single-pic>
 
               <input *ngSwitchDefault id="input{{i}}" [(ngModel)]="bean[item.name]" type="{{item.type}}"
                 class="form-control" placeholder="{{item.placeholder}}">

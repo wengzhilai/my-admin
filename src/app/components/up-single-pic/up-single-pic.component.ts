@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 
 import { FileItem, ParsedResponseHeaders, FileUploader } from '../../Lib/ng2-file-upload';
 import { Variables } from '../../Config/Variables';
@@ -8,10 +8,13 @@ import { Variables } from '../../Config/Variables';
   templateUrl: './up-single-pic.component.html',
   styleUrls: ['./up-single-pic.component.scss']
 })
-export class UpSinglePicComponent {
+export class UpSinglePicComponent  implements OnInit {
   @Input()
   CanEdit: boolean = true
 
+  @Input()
+  pathType: string = "pathType"
+  
   @Output()
   ChangeFileJson: EventEmitter<any> = new EventEmitter<any>();
 
@@ -19,45 +22,49 @@ export class UpSinglePicComponent {
   /**
   * 自定义model变量
   */
- private _myModel;
- /**
-  * 返回父组件变化后的值
-  */
- @Input()
- get myModel() {
-   return this._myModel;
- }
-
- /**
-  * 组件值产生变化后父组件改变
-  * @param value
-  */
- set myModel(value) {
-   this._myModel = value;
-   this.myModelChange.emit(value);
- }
- @Output()
- myModelChange: EventEmitter<any> = new EventEmitter();
-
-  uploader: FileUploader = new FileUploader({
-    url: Variables.Api_Upfile,
-    method: "POST",
-    itemAlias: "file",
-    autoUpload: true,
-    allowedFileType: ["image", "xls", "txt"],
-  });
+  private _myModel;
   /**
-   * 返回的信息列表
+   * 返回父组件变化后的值
    */
-  _reMsgList: Array<any> = [];
+  @Input()
+  get myModel() {
+    return this._myModel;
+  }
+
+  /**
+   * 组件值产生变化后父组件改变
+   * @param value
+   */
+  set myModel(value) {
+    this._myModel = value;
+    this.myModelChange.emit(value);
+  }
+  @Output()
+  myModelChange: EventEmitter<any> = new EventEmitter();
+
+  uploader: FileUploader 
+  
+  singleEnt:any;
+  lookPicPath:string;
   constructor(
   ) {
     console.log("UpFileComponent")
-    this.init();
   }
 
-  init() {
+  ngOnInit(): void {
     console.log('ionViewDidLoad UpFileComponent');
+    this.uploader= new FileUploader({
+      url: Variables.Api_Upfile,
+      method: "POST",
+      itemAlias: "file",
+      headers:[{
+        name: "pathType",
+        value: this.pathType
+      }],
+      autoUpload: true,
+      allowedFileType: ["image", "xls", "txt"],
+    });
+
     //上传一个文件成功的回调 
     this.uploader.onWhenAddingFileFailed = (item: any, filter: any, options: any) => {
       console.log(item)
@@ -78,11 +85,9 @@ export class UpSinglePicComponent {
       console.log("成功一个")
       console.log(response)
 
-      let tempRes = JSON.parse(response);
-      if (tempRes.IsSuccess) {
-        this._reMsgList.push(tempRes.Data)
-      }
-      console.log(tempRes)
+      this.singleEnt = JSON.parse(response).data;
+      this.lookPicPath=Variables.Api_LookUpfile+this.singleEnt.fileName+"?path="+this.singleEnt.filePath;
+      
     };
     this.uploader.onAfterAddingAll = (fileItems: any) => {
       console.log("添加完所有的")
@@ -93,23 +98,7 @@ export class UpSinglePicComponent {
 
   ReturnJson() {
     console.log('返回值')
-    //所有列表，包括没有成功的，和没有上传的
-    let tmpMsgList = []
-    // console.log(this.uploader.queue)
-    this.uploader.queue.forEach(e => {
-      console.log(e)
-      if (e.isSuccess) {
-        for (var index = 0; index < this._reMsgList.length; index++) {
-          var msg = this._reMsgList[index];
-          if (msg.NAME == e.file.name) {
-            tmpMsgList.push(msg)
-            break;
-          }
-        }
-      }
-    })
-    this._reMsgList = tmpMsgList;
-    // console.log(this._reMsgList)
-    this.ChangeFileJson.next(tmpMsgList)
+
+    this.ChangeFileJson.next(this.singleEnt)
   }
 }
