@@ -98,7 +98,6 @@ export class UpSinglePicComponent  implements OnInit {
 
   ReturnJson() {
     console.log('返回值')
-
-    this.ChangeFileJson.next(this.singleEnt)
+    this.myModelChange.next(this.singleEnt.filePath)
   }
 }
