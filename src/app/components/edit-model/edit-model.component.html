@@ -8,7 +8,7 @@
         <div class="form-group">
           <label for="inputFirstName">{{item.title}}</label>
           <input *ngIf="item.editor==null || item.editor.type=='text';else elseBlock" id="input{{i}}"
-            [(ngModel)]="bean[item.name]" type="{{item.type}}" class="form-control" placeholder="{{item.placeholder}}">
+            [(ngModel)]="bean[item.name]" type="{{item.type=='int'?'number':item.type}}" class="form-control" placeholder="{{item.placeholder}}">
           <ng-template #elseBlock>
             <ng-container [ngSwitch]="item.editor.type">
               <select *ngSwitchCase="'list'" id="input{{i}}" [(ngModel)]="bean[item.name]" class="form-control">
@@ -27,7 +27,7 @@
                   bsDatepicker >
               <ngx-up-single-pic *ngSwitchCase="'file'" [(myModel)]="bean[item.name]" [pathType]="'userIcon'" [CanEdit]="true"></ngx-up-single-pic>
 
-              <input *ngSwitchDefault id="input{{i}}" [(ngModel)]="bean[item.name]" type="{{item.type}}"
+              <input *ngSwitchDefault id="input{{i}}" [(ngModel)]="bean[item.name]" type="{{item.type=='int'?'number':item.type}}"
                 class="form-control" placeholder="{{item.placeholder}}">
             </ng-container>
           </ng-template>

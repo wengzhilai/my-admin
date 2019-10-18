@@ -11,7 +11,7 @@
             <nb-option *ngFor="let op of item.filter.opType" value="{{op.opType}}">{{op.opName}}</nb-option>
           </nb-select>
           <input *ngIf="item.filter==null || item.filter.type=='text';else elseBlock" id="input{{i}}"
-            [(ngModel)]="bean[item.name]" type="{{item.type}}" class="form-control" placeholder="{{item.placeholder}}">
+            [(ngModel)]="bean[item.name]" type="{{item.type=='int'?'number':item.type}}" class="form-control" placeholder="{{item.placeholder}}">
           <ng-template #elseBlock>
             <ng-container [ngSwitch]="item.filter.type">
               <select *ngSwitchCase="'list'" id="input{{i}}" [(ngModel)]="bean[item.name]" class="form-control">
@@ -28,7 +28,7 @@
               <input *ngSwitchCase="'Date'" id="input{{i}}" [(ngModel)]="bean[item.name]" class="form-control"
                   [bsConfig]="item.filter.bsConfig" bsDaterangepicker>
 
-              <input *ngSwitchDefault id="input{{i}}" [(ngModel)]="bean[item.name]" type="{{item.type}}"
+              <input *ngSwitchDefault id="input{{i}}" [(ngModel)]="bean[item.name]" type="{{item.type=='int'?'number':item.type}}"
                 class="form-control" placeholder="{{item.placeholder}}">
             </ng-container>
           </ng-template>

@@ -65,6 +65,10 @@ export class UpSinglePicComponent  implements OnInit {
       allowedFileType: ["image", "xls", "txt"],
     });
 
+    if(this.myModel!=null && this.myModel!='null'){
+      this.lookPicPath=Variables.Api_LookUpfile+this.myModel;
+    }
+
     //上传一个文件成功的回调 
     this.uploader.onWhenAddingFileFailed = (item: any, filter: any, options: any) => {
       console.log(item)
@@ -86,7 +90,8 @@ export class UpSinglePicComponent  implements OnInit {
       console.log(response)
 
       this.singleEnt = JSON.parse(response).data;
-      this.lookPicPath=Variables.Api_LookUpfile+this.singleEnt.fileName+"?path="+this.singleEnt.filePath;
+      // this.lookPicPath=Variables.Api_LookUpfile+this.singleEnt.fileName+"?path="+this.singleEnt.filePath;
+      this.lookPicPath=Variables.Api_LookUpfile+this.singleEnt.fileDownloadUri;
       
     };
     this.uploader.onAfterAddingAll = (fileItems: any) => {
@@ -98,6 +103,6 @@ export class UpSinglePicComponent  implements OnInit {
 
   ReturnJson() {
     console.log('返回值')
-    this.myModelChange.next(this.singleEnt.filePath)
+    this.myModelChange.next(this.singleEnt.fileDownloadUri)
   }
 }

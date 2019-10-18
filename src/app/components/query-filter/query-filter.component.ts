@@ -28,8 +28,8 @@ export class QueryFilterComponent implements OnInit {
   ngOnInit() {
     for (const key in this.inputs) {
       let element = this.inputs[key];
-      //是不显示配置了filterAble =false
-      if (element["filterAble"] != null && element["filterAble"] == false) {
+      //是不显示配置了 filterable =false
+      if (element["filterable"] != null && element["filterable"] == false) {
         continue;
       }
       //如果没有配置filter，则采用editor的配置
