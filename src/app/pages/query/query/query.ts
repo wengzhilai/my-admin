@@ -92,6 +92,17 @@ export class QueryQueryComponent implements OnInit {
         //设置表头按钮配置
         eval("t=" + this.queryEnt.heardBtn)
         this.headBtnSet = t
+        //如果没有配置筛选，则添加
+        this.headBtnSet.push({
+          "title": "导出",
+          "class": "ion-archive",
+          "click": "nowThis.onExportXls()"
+        })
+        this.headBtnSet.push({
+          "title": "筛选",
+          "class": "ion-funnel",
+          "click": "nowThis.OpenFilter()"
+        })
         //读取行按钮
         try {
           eval("t=" + this.queryEnt.rowsBtn)

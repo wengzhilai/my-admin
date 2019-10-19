@@ -39,9 +39,9 @@ export class SmartTableDataSource extends LocalDataSource {
     return this.requestElements()
       .pipe(map(res => {
         //用于Query查询
-        if(res.data!=null && res.data.rows!=null && res.data.total!=null){
-          res.msg=res.data.total;
-          res.dataList=res.data.rows;
+        if(res.dataList!=null){
+          res.msg=res.total;
+          res.dataList=res.dataList;
         }
 
 

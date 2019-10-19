@@ -31,11 +31,12 @@ import {
 } from '@nebular/theme';
 import { FileUploadModule } from '../Lib/ng2-file-upload';
 import { UpSinglePicComponent } from './up-single-pic/up-single-pic.component';
+import { InputSelectTreeComponent } from './input-select-tree/input-select-tree.component';
 
 
 @NgModule({
-  entryComponents: [EditModelComponent, QueryEditComponent, RoleEditComponent, TableEditComponent,LookModelComponent,QueryFilterComponent,UpSinglePicComponent],
-  declarations: [EditModelComponent, QueryEditComponent, RoleEditComponent, InputSelectComponent, TableEditComponent, LookModelComponent,QueryFilterComponent,UpSinglePicComponent],
+  entryComponents: [EditModelComponent, QueryEditComponent, RoleEditComponent, TableEditComponent,LookModelComponent,QueryFilterComponent,UpSinglePicComponent,InputSelectTreeComponent],
+  declarations: [EditModelComponent, QueryEditComponent, RoleEditComponent, InputSelectComponent, TableEditComponent, LookModelComponent,QueryFilterComponent,UpSinglePicComponent,InputSelectTreeComponent],
   imports: [
     IonicModule,
     TranslateModule,
@@ -68,6 +69,7 @@ import { UpSinglePicComponent } from './up-single-pic/up-single-pic.component';
     LookModelComponent,
     QueryFilterComponent,
     UpSinglePicComponent,
+    InputSelectTreeComponent,
   ]
 })
 export class ComponentsModule { }

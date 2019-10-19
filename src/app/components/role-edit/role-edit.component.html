@@ -4,10 +4,10 @@
   </ul>
   <div [ngStyle]="{'height':screenheight+'px','overflow-y':'auto'}">
     <div class="row show-grid">
-      <div class="col-md-4">
+      <div class="col-md-12">
         <div class="form-group">
           <label>{{inputs['name'].title}}</label>
-          <input [(ngModel)]="bean[inputs['name'].name]" type="text" style="width: 100%" class="form-control"
+          <input [(ngModel)]="bean[inputs['name'].name]" type="text" class="form-control"
             placeholder="{{inputs['name'].placeholder}}">
         </div>
       </div>
@@ -23,7 +23,7 @@
     </div>
     <div class="row show-grid">
       <div class="col-md-12">
-        {{bean["moduleIdStr"]}}
+        <!-- {{bean["moduleIdStr"]}} -->
         <tree-root #tree [nodes]="nodes" (deselect)="onSelect($event)" (select)="onSelect($event)" [options]="options"></tree-root>
       </div>
     </div>

@@ -92,9 +92,9 @@ export class Fun {
         return null;
     }
 
-    public static UrlToJosn(url:String): any {
+    public static UrlToJosn(url: String): any {
         console.log("url转josn");
-        if (url == null || url=="" || url.indexOf('?')==-1) return {};
+        if (url == null || url == "" || url.indexOf('?') == -1) return {};
         let arr = url.split('?')[1].split('&');   //先通过？分解得到？后面的所需字符串，再将其通过&分解开存放在数组里
         let obj = {};
         for (let i of arr) {
@@ -104,25 +104,25 @@ export class Fun {
         return obj;
     }
 
-    public static JosnToUrl(jsonOjb:{}) {
+    public static JosnToUrl(jsonOjb: {}) {
         var paramStr = "";
         for (const key in jsonOjb) {
             const param = jsonOjb[key];
             if (param instanceof String || param instanceof Number || param instanceof Boolean) {
                 paramStr += "&" + key + "=" + encodeURIComponent(param.toString());
-            } 
-            else if(param instanceof Array) { 
+            }
+            else if (param instanceof Array) {
                 for (let index = 0; index < param.length; index++) {
                     const element = param[index];
                     var k = key + (param instanceof Array ? "[" + index + "]" : "." + index);
                     paramStr += '&' + k;
                 }
             }
-            else{
+            else {
 
             }
         }
-        
+
         return paramStr.substr(1);
     }
 
@@ -591,15 +591,15 @@ export class Fun {
     }
 
 
- /**
- * 获取类的所有属性
- * 
- * @param {any} bean 传入的类
- * @param {any} cfg {id:{editable:false}}读取配置是否可以编辑
- * @returns 返回类的所有字段的字符串，以逗号分隔
- * @memberof CommonService
- */
-    public static GetBeanNameStr(bean: any,cfg: any) {
+    /**
+    * 获取类的所有属性
+    * 
+    * @param {any} bean 传入的类
+    * @param {any} cfg {id:{editable:false}}读取配置是否可以编辑
+    * @returns 返回类的所有字段的字符串，以逗号分隔
+    * @memberof CommonService
+    */
+    public static GetBeanNameStr(bean: any, cfg: any) {
         var tmpArr = [];
         for (var item in bean) {
             var objV = bean[item];
@@ -607,17 +607,16 @@ export class Fun {
                 tmpArr.push(item);
             }
         }
-        if(cfg!=null)
-        {
+        if (cfg != null) {
             for (let index = 0; index < tmpArr.length; index++) {
                 const element = tmpArr[index];
-                if(cfg[element]!=null && cfg[element]["editable"]!=null && cfg[element]["editable"]==false){
-                    tmpArr.splice(index,1);
+                if (cfg[element] != null && cfg[element]["editable"] != null && cfg[element]["editable"] == false) {
+                    tmpArr.splice(index, 1);
                 }
             }
- 
+
         }
-        
+
         return tmpArr;
     }
 
@@ -665,4 +664,47 @@ export class Fun {
         console.log(3);
 
     }
+    /**
+     * 判断数组里是否包含值
+     * @param arrObj 传入的对象
+     * @param objName 属性名
+     * @param objValue 值
+     */
+    public static getArrayItem(arrObj: Array<any>, objName: string, objValue: string) {
+        arrObj.forEach(element => {
+            if (element.hasOwnProperty(objName) && element[objName] == objValue) {
+                return true;
+            }
+        });
+        return false;
+    }
+
+    /**
+     *  把数组json转成tree可以用的json，子项的字段是childrenField
+     * @param array 传入的json数组
+     * @param parentField 父字段
+     * @param idField 主键字段
+     * @param childrenField 生成的子字段
+     * @param parentValue 父字段值
+     */
+    public static makeTreeJson(array: Array<any>, parentField: string, idField: string, childrenField: string, parentValue: string) {
+        let reJson: Array<any>=[];
+        array.forEach(element => {
+            if (parentValue == null) {
+                if (element[parentField] == null || element[parentField].toString() == "0") {
+                    element[childrenField] = this.makeTreeJson(array, parentField, idField, childrenField, element[idField])
+                    reJson.push(element);
+                }
+            }
+            else {
+                if (element[parentField] == parentValue) {
+                    element[childrenField] = this.makeTreeJson(array, parentField, idField, childrenField, element[idField])
+                    reJson.push(element);
+                }
+            }
+
+        });
+        return reJson;
+    }
+
 }

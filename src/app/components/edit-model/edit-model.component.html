@@ -20,6 +20,8 @@
               </select>
               <input-select *ngSwitchCase="'listAsyn'" id="input{{i}}" [(myModel)]="bean[item.name]" [PostEnt]="item.editor.config.postEnt" [multiple]="item.editor.config.multiple" [ApiUrl]="item.editor.config.api">
               </input-select>
+              <input-select-tree *ngSwitchCase="'listTreeAsyn'" id="input{{i}}" [(myModel)]="bean[item.name]" [PostEnt]="item.editor.config.postEnt" [options]="item.editor.config.TreeOptions" [ApiUrl]="item.editor.config.api">
+              </input-select-tree>
               <textarea *ngSwitchCase="'textarea'" id="input{{i}}" [(ngModel)]="bean[item.name]" rows="3"
                 placeholder="{{item.placeholder}}" class="form-control"></textarea>
               <input *ngSwitchCase="'Date'" id="input{{i}}" [(ngModel)]="bean[item.name]" class="form-control"

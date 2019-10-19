@@ -69,7 +69,7 @@ export class InputSelectComponent implements OnInit {
     this.httpHelper.Post(this.ApiUrl, this.PostEnt).then((x: DtoResultObj<any>) => {
       Fun.HideLoading();
       if (x.success) {
-        this.ListData = x.data.rows;
+        this.ListData = x.dataList;
       }
       else{
         Fun.Hint(x.msg)

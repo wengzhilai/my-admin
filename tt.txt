@@ -1,0 +1,22 @@
+,
+        "editor": {
+            "type": "listAsyn",
+            "config": {
+                "api": "user/query/getListData",
+                "multiple": true,
+                "postEnt": {
+                    "code": "role"
+                },
+                "hasAllCheckBox": false,
+                "maxHeight": 100
+            }
+        },
+        "filter": {
+            "type": "listAsyn",
+            "config": {
+                "api": "user/query/getListData",
+                "postEnt": {
+                    "code": "role"
+                }
+            }
+        }
