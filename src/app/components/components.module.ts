@@ -32,11 +32,18 @@ import {
 import { FileUploadModule } from '../Lib/ng2-file-upload';
 import { UpSinglePicComponent } from './up-single-pic/up-single-pic.component';
 import { InputSelectTreeComponent } from './input-select-tree/input-select-tree.component';
+import { InputCheckboxComponent } from './input-checkbox/input-checkbox.component';
 
 
 @NgModule({
-  entryComponents: [EditModelComponent, QueryEditComponent, RoleEditComponent, TableEditComponent,LookModelComponent,QueryFilterComponent,UpSinglePicComponent,InputSelectTreeComponent],
-  declarations: [EditModelComponent, QueryEditComponent, RoleEditComponent, InputSelectComponent, TableEditComponent, LookModelComponent,QueryFilterComponent,UpSinglePicComponent,InputSelectTreeComponent],
+  entryComponents: [
+    EditModelComponent, QueryEditComponent, RoleEditComponent, TableEditComponent,LookModelComponent,
+    QueryFilterComponent,UpSinglePicComponent,InputSelectTreeComponent,InputCheckboxComponent
+  ],
+  declarations: [
+    EditModelComponent, QueryEditComponent, RoleEditComponent, InputSelectComponent, TableEditComponent, 
+    LookModelComponent,QueryFilterComponent,UpSinglePicComponent,InputSelectTreeComponent,InputCheckboxComponent
+  ],
   imports: [
     IonicModule,
     TranslateModule,
@@ -70,6 +77,7 @@ import { InputSelectTreeComponent } from './input-select-tree/input-select-tree.
     QueryFilterComponent,
     UpSinglePicComponent,
     InputSelectTreeComponent,
+    InputCheckboxComponent,
   ]
 })
 export class ComponentsModule { }

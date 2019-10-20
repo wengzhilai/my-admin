@@ -11,7 +11,7 @@ import { TreeComponent, ITreeOptions } from 'angular-tree-component';
 })
 export class InputSelectTreeComponent implements OnInit {
   
-  @ViewChild('tree', { static: true }) tree: TreeComponent;
+  @ViewChild('tree', { static: false }) tree: TreeComponent;
 
   /**
    * 接口地址
@@ -29,6 +29,13 @@ export class InputSelectTreeComponent implements OnInit {
   @Input()
   options: ITreeOptions = {
   };
+
+  /**
+   * 当前绑定的配置
+   */
+  thisOptions: ITreeOptions = {
+  };
+
 
 
   /**
@@ -69,7 +76,8 @@ export class InputSelectTreeComponent implements OnInit {
     console.log("input-select-tree的参数")
     console.log("ApiUrl："+this.ApiUrl);
     console.log("options:"+this.options);
-
+    this.thisOptions=null;
+    this.thisOptions=this.options;
 
     this.LoadNodes();
     
@@ -89,22 +97,35 @@ export class InputSelectTreeComponent implements OnInit {
       console.log(this.myModel)
       if (this.myModel != null) {
         this.selectList=this.myModel.toString().split(',')
+        console.log(this.selectList)
         this.selectList.forEach(element => {
-          this.tree.treeModel.selectedLeafNodeIds[element] = true
+          // this.tree.treeModel.setActiveNode(this.tree.treeModel.nodes[0],true)
         });
       }
     });
   }
 
   onSelect(obj) {
-    var tmp = this.tree.treeModel.selectedLeafNodeIds;
-    this.selectList = []
-    for (const key in tmp) {
-      if (tmp[key]) {
-        this.selectList.push(key);
-      }
-    }
-    this.myModel=this.selectList.join(",");
+    // console.log(obj)
+    // console.log(this.tree);
+    // var tmp = this.tree.treeModel.selectedLeafNodeIds;
+    // console.log(tmp)
+    // this.selectList = []
+    // for (const key in tmp) {
+    //   if (tmp[key]) {
+    //     this.selectList.push(key);
+    //   }
+    // }
+    // this.myModel=this.selectList.join(",");
+  }
+
+  activateChange(obj) {
+    // console.log(obj)
+    // console.log(this.tree);
+    var tmp = this.tree.treeModel.getActiveNode();
+    // console.log(tmp)
+
+    this.myModel=tmp.data.id;
   }
 
 }
