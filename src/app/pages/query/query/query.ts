@@ -1,11 +1,9 @@
 import { Component, OnInit, ViewChild, ViewContainerRef, Renderer2 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { LocalDataSource } from 'ng2-smart-table';
 import { SmartTableDataSource } from '../../../Helper/SmartTableDataSource';
 import { HttpHelper } from '../../../Helper/HttpHelper';
 import { NbWindowService } from '@nebular/theme';
 import { DtoResultObj } from '../../../Model/DtoRec/DtoResult';
-import { ServerSourceConf } from 'ng2-smart-table/lib/data-source/server/server-source.conf';
 import { Variables } from '../../../Config/Variables';
 import { Fun } from '../../../Config/Fun';
 import { DtoDo } from '../../../Model/DtoPost/DtoDo';
@@ -15,6 +13,7 @@ import { RoleEditComponent } from '../../../components/role-edit/role-edit.compo
 import { QueryEditComponent } from '../../../components/query-edit/query-edit.component';
 import { TableEditComponent } from '../../../components/table-edit/table-edit.component'
 import { QueryFilterComponent } from '../../../components/query-filter/query-filter.component';
+import { ServerSourceConf } from '../../../Lib/ng2-smart-table/lib/lib/data-source/server/server-source.conf';
 
 @Component({
   selector: 'query',

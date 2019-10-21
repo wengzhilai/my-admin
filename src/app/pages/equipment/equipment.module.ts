@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { ThemeModule } from '../../@theme/theme.module';
 import {
   NbActionsModule,
@@ -23,6 +22,7 @@ import { EquipmentRoutingModule, routedComponents } from './equipment.routes';
 import { EditModelComponent } from '../../components/edit-model/edit-model.component';
 import { TreeModule } from 'angular-tree-component';
 import { LookModelComponent } from '../../components/look-model/look-model.component';
+import { Ng2SmartTableModule } from '../../Lib/ng2-smart-table/public-api';
 
 
 @NgModule({

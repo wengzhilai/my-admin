@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { TreeModule } from 'angular-tree-component';
@@ -33,6 +32,7 @@ import { FileUploadModule } from '../Lib/ng2-file-upload';
 import { UpSinglePicComponent } from './up-single-pic/up-single-pic.component';
 import { InputSelectTreeComponent } from './input-select-tree/input-select-tree.component';
 import { InputCheckboxComponent } from './input-checkbox/input-checkbox.component';
+import { Ng2SmartTableModule } from '../Lib/ng2-smart-table/public-api';
 
 
 @NgModule({

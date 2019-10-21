@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NbWindowRef } from '@nebular/theme';
 import { DtoResultObj } from '../../Model/DtoRec/DtoResult';
-import { SmartTableDataSource } from '../../Helper/SmartTableDataSource';
-import { LocalDataSource } from 'ng2-smart-table';
 import { Fun } from '../../Config/Fun';
+import { LocalDataSource } from '../../Lib/ng2-smart-table/public-api';
 
 @Component({
   selector: 'ngx-table-edit',

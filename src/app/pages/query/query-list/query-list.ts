@@ -1,14 +1,13 @@
 import { Component, OnInit, ViewChild, ElementRef, ContentChild, ViewContainerRef, Renderer2 } from '@angular/core';
-import { LocalDataSource } from 'ng2-smart-table';
 import { HttpHelper } from '../../../Helper/HttpHelper';
 import { SmartTableDataSource } from '../../../Helper/SmartTableDataSource';
 import { Fun } from '../../../Config/Fun';
 import { DtoResult, DtoResultObj } from '../../../Model/DtoRec/DtoResult';
 import { NbWindowService } from '@nebular/theme';
-import { ServerSourceConf } from 'ng2-smart-table/lib/data-source/server/server-source.conf';
 import { DtoSaveObj } from '../../../Model/DtoPost/DtoSaveObj';
 import { DtoDo } from '../../../Model/DtoPost/DtoDo';
 import { QueryEditComponent } from '../../../components/query-edit/query-edit.component';
+import { ServerSourceConf } from '../../../Lib/ng2-smart-table/lib/lib/data-source/server/server-source.conf';
 
 @Component({
   selector: 'query-list',
@@ -57,6 +56,7 @@ export class QueryListPage implements OnInit {
         "title": '自动加载',
         "defaultValue": 1,
         "type": 'string',
+        "valuePrepareFunction": (v) => { return v == 1 ? '是' : '否' },
         "name":"autoLoad",
         "editor": {
           "type": 'list',
@@ -79,6 +79,7 @@ export class QueryListPage implements OnInit {
         "type": 'string',
         "defaultValue": 1,
         "name":"showCheckbox",
+        "valuePrepareFunction": (v) => { return v == 1 ? '是' : '否' },
         "editor": {
           "type": 'list',
           "config": {
@@ -94,6 +95,7 @@ export class QueryListPage implements OnInit {
         "type": 'string',
         "defaultValue": 1,
         "name":"isDebug",
+        "valuePrepareFunction": (v) => { return v == 1 ? '是' : '否' },
         "editor": {
           "type": 'list',
           "config": {

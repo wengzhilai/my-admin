@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { ThemeModule } from '../../@theme/theme.module';
 
 import { QueryListPage } from './query-list/query-list';
@@ -21,6 +20,7 @@ import {
   NbListModule,
   NbIconModule,
 } from '@nebular/theme';
+import { Ng2SmartTableModule } from '../../Lib/ng2-smart-table/public-api';
 
 @NgModule({
   entryComponents: [

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { LocalDataSource } from 'ng2-smart-table';
 
 import { SmartTableData } from '../../../@core/data/smart-table';
+import { LocalDataSource } from '../../../Lib/ng2-smart-table/public-api';
 
 @Component({
   selector: 'ngx-smart-table',

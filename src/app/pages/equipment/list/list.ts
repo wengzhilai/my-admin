@@ -4,7 +4,6 @@ import { SmartTableDataSource } from '../../../Helper/SmartTableDataSource';
 import { HttpHelper } from '../../../Helper/HttpHelper';
 import { NbWindowService } from '@nebular/theme';
 import { DtoResultObj } from '../../../Model/DtoRec/DtoResult';
-import { ServerSourceConf } from 'ng2-smart-table/lib/data-source/server/server-source.conf';
 import { Variables } from '../../../Config/Variables';
 import { Fun } from '../../../Config/Fun';
 import { EditModelComponent } from '../../../components/edit-model/edit-model.component';
@@ -12,6 +11,7 @@ import { RoleEditComponent } from '../../../components/role-edit/role-edit.compo
 import { QueryEditComponent } from '../../../components/query-edit/query-edit.component';
 import { TableEditComponent } from '../../../components/table-edit/table-edit.component'
 import { LookModelComponent } from '../../../components/look-model/look-model.component';
+import { ServerSourceConf } from '../../../Lib/ng2-smart-table/lib/lib/data-source/server/server-source.conf';
 
 @Component({
   selector: 'Equipment_List',

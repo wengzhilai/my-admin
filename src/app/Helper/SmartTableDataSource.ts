@@ -1,6 +1,4 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { LocalDataSource } from "ng2-smart-table";
-import { ServerSourceConf } from "ng2-smart-table/lib/data-source/server/server-source.conf";
 // import { getDeepFromObject } from "@Nebular/auth/helpers";
 import { Observable } from "rxjs";
 import { HttpHelper } from "./HttpHelper";
@@ -8,6 +6,8 @@ import { HttpHelper } from "./HttpHelper";
 import { map } from 'rxjs/operators';
 import { DtoResultObj } from "../Model/DtoRec/DtoResult";
 import { Fun } from "../Config/Fun";
+import { LocalDataSource } from '../Lib/ng2-smart-table/public-api';
+import { ServerSourceConf } from '../Lib/ng2-smart-table/lib/lib/data-source/server/server-source.conf';
 
 export class SmartTableDataSource extends LocalDataSource {
   protected conf: ServerSourceConf;
