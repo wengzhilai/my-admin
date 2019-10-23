@@ -37,7 +37,7 @@ export class QuartzTaskListPage implements OnInit {
     private renderer: Renderer2
   ) {
     let smartTableCofnig: ServerSourceConf = new ServerSourceConf();
-    smartTableCofnig.endPoint = 'QuartzTask/List';
+    smartTableCofnig.endPoint = 'quartz/quartzTask/list';
     smartTableCofnig.pagerLimitKey = ""
     this.source = new SmartTableDataSource(this.HttpHelper, smartTableCofnig);
     this.configJson = {
@@ -103,7 +103,7 @@ export class QuartzTaskListPage implements OnInit {
   /** 检测是否启动 */
   async ReLoad(){
     //先根据ID找到对象
-    this.HttpHelper.Post("QuartzTask/IsStarted", null).then(async (x: DtoResultObj<any>) => {
+    this.HttpHelper.Post("quartz/quartzTask/isStarted", null).then(async (x: DtoResultObj<any>) => {
       if (x.success) {
         this.IsStart=x.data;
         if(this.IsStart){
@@ -125,7 +125,7 @@ export class QuartzTaskListPage implements OnInit {
   async onStart(){
     //先根据ID找到对象
     await Fun.ShowLoading();
-    this.HttpHelper.Post("QuartzTask/Start", null).then(async (x: DtoResultObj<any>) => {
+    this.HttpHelper.Post("quartz/quartzTask/start", null).then(async (x: DtoResultObj<any>) => {
       await Fun.HideLoading()
       if (x.success) {
         Fun.Hint("启动成功")
@@ -141,7 +141,7 @@ export class QuartzTaskListPage implements OnInit {
   async Stop(){
     //先根据ID找到对象
     await Fun.ShowLoading();
-    this.HttpHelper.Post("QuartzTask/Stop", null).then(async (x: DtoResultObj<any>) => {
+    this.HttpHelper.Post("quartz/quartzTask/stop", null).then(async (x: DtoResultObj<any>) => {
       await Fun.HideLoading()
       if (x.success) {
         Fun.Hint("停止成功")
@@ -207,7 +207,7 @@ export class QuartzTaskListPage implements OnInit {
       Fun.ShowLoading();
       let postClass: DtoDo = new DtoDo();
       postClass.key = event.data.ID;
-      this.HttpHelper.Post("QuartzTask/RemoveJob", postClass).then((data: DtoResult) => {
+      this.HttpHelper.Post("quartz/quartzTask/removeJob", postClass).then((data: DtoResult) => {
         Fun.HideLoading()
         if (data.success) {
           this.source.refresh()
