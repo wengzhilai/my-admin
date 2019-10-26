@@ -11,6 +11,7 @@ import { QueryEditComponent } from '../../components/query-edit/query-edit.compo
 import { TableEditComponent } from '../../components/table-edit/table-edit.component';
 import {
   NbActionsModule,
+  NbAlertModule,
   NbButtonModule,
   NbCardModule,
   NbTabsetModule,
@@ -43,6 +44,7 @@ import { Ng2SmartTableModule } from '../../Lib/ng2-smart-table/public-api';
     NbSelectModule,
     NbListModule,
     NbIconModule,
+    NbAlertModule,
   ],
   declarations: [
     QueryListPage,

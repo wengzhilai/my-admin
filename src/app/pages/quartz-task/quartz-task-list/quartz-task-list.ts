@@ -41,43 +41,43 @@ export class QuartzTaskListPage implements OnInit {
     smartTableCofnig.pagerLimitKey = ""
     this.source = new SmartTableDataSource(this.HttpHelper, smartTableCofnig);
     this.configJson = {
-      "KeyName": {
+      "keyName": {
         "title": '名称',
         "type": 'string',
       },
-      "KeyGroup": {
+      "keyGroup": {
         "title": '组名称',
         "type": 'string'
       },
-      "JobDataListStr": {
+      "jobDataListStr": {
         "title": '传入的参数',
         "type": 'string'
       },
-      "CalendarName": {
+      "calendarName": {
         "title": '日历名称',
         "type": 'string',
       },
-      "Description": {
+      "description": {
         "title": '描述',
         "type": 'string',
       },
-      "EndTime": {
+      "endTime": {
         "title": '结束时间',
         "type": 'string',
       },
-      "FinalFireTimeUtc": {
+      "finalFireTimeUtc": {
         "title": '最后一次执行时间',
         "type": 'string',
       },
-      "NextFireTime": {
+      "nextFireTime": {
         "title": '下次执行时间',
         "type": 'string',
       },
-      "Priority": {
+      "priority": {
         "title": '执行级别',
         "type": 'string',
       },
-      "StartTimeUtc": {
+      "startTimeUtc": {
         "title": '开始执行时间',
         "type": 'string',
       }
@@ -107,6 +107,9 @@ export class QuartzTaskListPage implements OnInit {
       if (x.success) {
         this.IsStart=x.data;
         if(this.IsStart){
+          this.source.refresh()
+        }
+        else{
           this.source.refresh()
         }
       }
@@ -206,7 +209,7 @@ export class QuartzTaskListPage implements OnInit {
     if (window.confirm('确定要删除吗?')) {
       Fun.ShowLoading();
       let postClass: DtoDo = new DtoDo();
-      postClass.key = event.data.ID;
+      postClass.key = event.data.keyName;
       this.HttpHelper.Post("quartz/quartzTask/removeJob", postClass).then((data: DtoResult) => {
         Fun.HideLoading()
         if (data.success) {

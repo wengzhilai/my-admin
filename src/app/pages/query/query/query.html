@@ -5,13 +5,15 @@
 
   <nb-card-body>
     <div>
-      <div class="alert alert-primary">
-        {{queryEnt.remark}}
-        <span class="float-right">
+
+      <nb-alert outline="info" >
+        <div class="row show-grid"> 
+        <div class="col-md-11">{{queryEnt.remark}}</div>
+        <div class="col-md-1" style="font-size: 1.5rem !important;font-weight: bold;">
           <i (click)="ReLoad()" class="nb-loop"></i>
-          <i (click)="ShowMore=(!ShowMore)" class="ion-arrow-resize {{ ShowMore==true?'txtGray':''}}"></i>
-        </span>
+        </div>
       </div>
+      </nb-alert>
     </div>
 
     <tr #btnHead>

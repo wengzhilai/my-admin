@@ -7,6 +7,7 @@ import { QuartzTaskRoutingModule, routedComponents } from './quartz-task.routes'
 import { EditModelComponent } from '../../components/edit-model/edit-model.component';
 import {
   NbCardModule,
+  NbButtonModule,
 } from '@nebular/theme';
 import { Ng2SmartTableModule } from '../../Lib/ng2-smart-table/public-api';
 
@@ -22,6 +23,7 @@ import { Ng2SmartTableModule } from '../../Lib/ng2-smart-table/public-api';
     ComponentsModule,
 
     NbCardModule,
+    NbButtonModule,
 
   ],
   declarations: [

@@ -5,19 +5,19 @@
   <tr #btnHead>
     <td [attr.colspan]="clmNum">
       <div style="float: left;margin-right: 5px;">
-        <button type="button" class="btn btn-icon btn-primary btn-xs" [disabled]="IsStart" (click)="onStart()">
+        <button type="button" nbButton [disabled]="IsStart" (click)="onStart()">
           <i class="nb-plus-circled"></i>
           <span>{{i18n+".Start"|translate}}</span>
         </button>
       </div>
       <div style="float: left;margin-right: 5px;">
-        <button type="button" class="btn btn-icon btn-primary btn-xs" (click)="ReLoad()">
+        <button type="button" nbButton (click)="ReLoad()">
           <i class="nb-plus-circled"></i>
           <span>{{i18n+".ReLoad"|translate}}</span>
         </button>
       </div>
       <div style="float: left;margin-right: 5px;">
-          <button type="button" class="btn btn-icon btn-primary btn-xs" [disabled]="!IsStart" (click)="Stop()">
+          <button type="button" nbButton [disabled]="!IsStart" (click)="Stop()">
             <i class="nb-plus-circled"></i>
             <span>{{i18n+".Stop"|translate}}</span>
           </button>

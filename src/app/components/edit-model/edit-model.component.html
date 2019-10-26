@@ -4,7 +4,7 @@
   </ul>
   <div class="row show-grid" [ngStyle]="{'overflow-y':'auto'}">
     <ng-container *ngFor="let item of ItmeArr;let i = index">
-      <div class="col-md-4" *ngIf="item.editable==null || item.editable==true">
+      <div class="{{item.style==null?'col-md-4':item.style}}" *ngIf="item.editable==null || item.editable==true">
         <div class="form-group">
           <label for="inputFirstName">{{item.title}}</label>
           <input *ngIf="item.editor==null || item.editor.type=='text';else elseBlock" id="input{{i}}"
