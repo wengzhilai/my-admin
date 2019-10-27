@@ -71,7 +71,7 @@ export class EquipmentListComponent implements OnInit {
     this.LoadSetting = false;
     let postEnt = { Key: this.code }
     await Fun.ShowLoading();
-    return this.HttpHelper.Post("Equipment/GetConfig", postEnt).then((data: DtoResultObj<any>) => {
+    return this.HttpHelper.Post("equipment/Equipment/GetConfig", postEnt).then((data: DtoResultObj<any>) => {
       Fun.HideLoading();
       if (data.success) {
         //显示table
@@ -92,7 +92,7 @@ export class EquipmentListComponent implements OnInit {
         this.settings.columns = this.configJson
 
         let smartTableCofnig: ServerSourceConf = new ServerSourceConf();
-        smartTableCofnig.endPoint = 'Equipment/GetConfigAndData';
+        smartTableCofnig.endPoint = 'equipment/Equipment/GetConfigAndData';
         smartTableCofnig.dataKey = "code"
 
         this.source = new SmartTableDataSource(this.HttpHelper, smartTableCofnig, this.code);
@@ -172,11 +172,11 @@ export class EquipmentListComponent implements OnInit {
                   postClass.dataStr = JSON.stringify(x);
                   postClass.TypeId = this.code
                   if (defaultData == null || defaultData.Id == null) {
-                    apiUrl = "Equipment/SaveEquiment";
+                    apiUrl = "equipment/Equipment/SaveEquiment";
                     postClass.Id = 0;
                   }
                   else {
-                    apiUrl = "Equipment/UpdateEquiment";
+                    apiUrl = "equipment/Equipment/UpdateEquiment";
                     postClass.Id = defaultData.Id;
                   }
                   await Fun.ShowLoading();
@@ -224,13 +224,13 @@ export class EquipmentListComponent implements OnInit {
    */
   onDelete(event): void {
 
-    this.DeleteApi("Equipment/DeleteEquiment", event.data.Id)
+    this.DeleteApi("equipment/Equipment/DeleteEquiment", event.data.Id)
 
   }
 
 
   onSave(nowThis, event) {
-    this.Add("Equipment/SaveEquiment", "EditModelComponent", event.data, "Equipment/SingleEquiment")
+    this.Add("equipment/Equipment/SaveEquiment", "EditModelComponent", event.data, "equipment/Equipment/SingleEquiment")
   }
   /**
    * 删除

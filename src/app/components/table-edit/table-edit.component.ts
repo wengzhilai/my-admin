@@ -34,19 +34,19 @@ export class TableEditComponent implements OnInit {
   source: LocalDataSource;
 
   configJson = {
-    "ID": {
+    "id": {
       "title": 'ID',
       "type": 'number',
     },
-    "NAME": {
+    "name": {
       "title": '别名',
       "type": 'string',
     },
-    "COLUMN_NAME": {
+    "columnName": {
       "title": '列名',
       "type": 'string',
     },
-    "STAUTS": {
+    "stauts": {
       "title": '状态',
       "type": 'string',
       "editor": {
@@ -59,64 +59,66 @@ export class TableEditComponent implements OnInit {
         }
       }
     },
-    "ORDER_INDEX": {
+    "orderIndex": {
       "title": '排序号',
       "type": 'number',
     },
-    "COLUMN_TYPE": {
+    "columnType": {
       "title": '列类型',//text,int,datatime,pic,textarea,Checkbox,Radio,auto
       "type": 'string',
       "editor": {
         "type": 'list',
         "config": {
           "list": [
-            { "value": "text", "title": '文本' },
-            { "value": "int", "title": '数字' },
-            { "value": "datatime", "title": '日期' },
-            { "value": "pic", "title": '图片' },
-            { "value": "textarea", "title": '多行文本' },
+            { "value": "Text", "title": '文本' },
+            { "value": "Int", "title": '数字' },
+            { "value": "Datatime", "title": '日期' },
+            { "value": "Pic", "title": '图片' },
+            { "value": "Textarea", "title": '多行文本' },
             { "value": "Checkbox", "title": '复选框' },
             { "value": "Radio", "title": '单选框' },
-            { "value": "auto", "title": '自动' }
+            { "value": "Auto", "title": '自动' }
           ]
         }
       }
     },
-    "COLUMN_LONG": {
+    "columnLong": {
       "title": '字段长度',
       "type": 'number',
     },
-    "IS_REQUIRED": {
+    "isRequired": {
       "title": '必填',
       "type": 'checkbox',
     },
-    "DEFAULT_VALUE": {
+    "defaultValue": {
       "title": '默认值',
       "type": 'string',
     },
-    "COLUMN_TYPE_CFG": {
+    "columnTypeCfg": {
       "title": '列配置内容',
       "type": 'string',
     },
-    "AUTHORITY": {
+    "authority": {
       "title": '权限',
       "type": 'number',
     },
-    "INTRODUCE": {
+    "introduce": {
       "title": '介绍',
       "type": 'string',
     },
   }
   ngOnInit() {
     this.settings.columns = this.configJson;
-    this.source = new LocalDataSource(this.bean["AllColumns"]);
+    this.settings.mode="inline";
+    if(this.bean["allColumns"]==null)this.bean["allColumns"]=[];
+    this.source = new LocalDataSource(this.bean["allColumns"]);
     for (const key in this.inputs) {
       let element = this.inputs[key];
       element["name"] = key
       this.ItmeArr.push(element);
     }
     this.source.onChanged().subscribe(x => {
-      this.bean["AllColumns"] = x.elements;
+      this.bean["allColumns"] = x.elements;
       console.log(this.bean)
     })
 
@@ -130,6 +132,10 @@ export class TableEditComponent implements OnInit {
           this.windowRef.close();
         }
       })
+  }
+
+  showAdd(even){
+    this.source.prepend({})
   }
 
 

@@ -82,21 +82,30 @@
   },
   "SmartTableSetting": {
     "noDataMessage": "无数据",
-    "actions": {
-      "columnTitle": "操作"
+    "mode": "external",
+    "hideSubHeader": true,
+    "add": {
+      "addButtonContent": "<i class=\"nb-plus\"></i>",
+      "createButtonContent": "<i class=\"nb-checkmark\"></i>",
+      "cancelButtonContent": "<i class=\"nb-close\"></i>"
     },
     "edit": {
-      "editButtonContent": "修改",
-      "saveButtonContent": "更新",
-      "cancelButtonContent": "取消"
-    },
-    "add": {
-      "addButtonContent": "添加",
-      "createButtonContent": "创建",
-      "cancelButtonContent": "取消"
+      "editButtonContent": "<i class=\"nb-edit\"></i>",
+      "saveButtonContent": "<i class=\"nb-checkmark\"></i>",
+      "cancelButtonContent": "<i class=\"nb-close\"></i>"
     },
     "delete": {
-      "deleteButtonContent": "删除"
+      "deleteButtonContent": "<i class=\"nb-trash\"></i>"
+    },
+    "actions": {
+      "columnTitle": "操作",
+      "add":false,
+      "position":"left"
+    },
+    "columns": {},
+    "pager": {
+      "display": true,
+      "perPage": 10
     }
   }
 }

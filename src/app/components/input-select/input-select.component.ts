@@ -65,9 +65,9 @@ export class InputSelectComponent implements OnInit {
 
   LoadSelectOption() {
     console.log(this._myModel)
-    Fun.ShowLoading();
+    // Fun.ShowLoading();
     this.httpHelper.Post(this.ApiUrl, this.PostEnt).then((x: DtoResultObj<any>) => {
-      Fun.HideLoading();
+      // Fun.HideLoading();
       if (x.success) {
         this.ListData = x.dataList;
       }

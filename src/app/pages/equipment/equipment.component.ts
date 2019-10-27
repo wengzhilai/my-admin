@@ -46,7 +46,7 @@ export class EquipmentComponent  implements OnInit {
   }
 
   LoadModule() {
-    this.httpHelper.Post("Equipment/GetTree", null).then((x: DtoResultObj<any>) => {
+    this.httpHelper.Post("equipment/equipment/GetTree", null).then((x: DtoResultObj<any>) => {
       if(!x.success){
         Fun.Hint(x.msg);
         return;
