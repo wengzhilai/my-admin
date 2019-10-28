@@ -69,9 +69,9 @@ export class EquipmentListComponent implements OnInit {
   async LoadData() {
 
     this.LoadSetting = false;
-    let postEnt = { Key: this.code }
+    let postEnt = { key: this.code }
     await Fun.ShowLoading();
-    return this.HttpHelper.Post("equipment/Equipment/GetConfig", postEnt).then((data: DtoResultObj<any>) => {
+    return this.HttpHelper.Post("equipment/equipment/getConfig", postEnt).then((data: DtoResultObj<any>) => {
       Fun.HideLoading();
       if (data.success) {
         //显示table
@@ -82,8 +82,8 @@ export class EquipmentListComponent implements OnInit {
         this.clmNum = 0;
         cfgJsonList.forEach((element: any) => {
           console.log(element);
-          if (element.hasOwnProperty("ColumnName")) {
-            this.configJson[element["ColumnName"]] = element;
+          if (element.hasOwnProperty("columnName")) {
+            this.configJson[element["columnName"]] = element;
             this.clmNum++;
           }
         });
@@ -92,7 +92,7 @@ export class EquipmentListComponent implements OnInit {
         this.settings.columns = this.configJson
 
         let smartTableCofnig: ServerSourceConf = new ServerSourceConf();
-        smartTableCofnig.endPoint = 'equipment/Equipment/GetConfigAndData';
+        smartTableCofnig.endPoint = 'equipment/equipment/getConfigAndData';
         smartTableCofnig.dataKey = "code"
 
         this.source = new SmartTableDataSource(this.HttpHelper, smartTableCofnig, this.code);
@@ -172,11 +172,11 @@ export class EquipmentListComponent implements OnInit {
                   postClass.dataStr = JSON.stringify(x);
                   postClass.TypeId = this.code
                   if (defaultData == null || defaultData.Id == null) {
-                    apiUrl = "equipment/Equipment/SaveEquiment";
+                    apiUrl = "equipment/equipment/saveEquiment";
                     postClass.Id = 0;
                   }
                   else {
-                    apiUrl = "equipment/Equipment/UpdateEquiment";
+                    apiUrl = "equipment/equipment/updateEquiment";
                     postClass.Id = defaultData.Id;
                   }
                   await Fun.ShowLoading();

@@ -31,8 +31,8 @@ export class EquipmentComponent  implements OnInit {
     /** 配置 */
     options: ITreeOptions = {
       childrenField: "child",
-      displayField: "V",
-      idField: "K",
+      displayField: "v",
+      idField: "k",
   
     };
   constructor(
@@ -46,7 +46,7 @@ export class EquipmentComponent  implements OnInit {
   }
 
   LoadModule() {
-    this.httpHelper.Post("equipment/equipment/GetTree", null).then((x: DtoResultObj<any>) => {
+    this.httpHelper.Post("equipment/equipment/getTree", {key:0}).then((x: DtoResultObj<any>) => {
       if(!x.success){
         Fun.Hint(x.msg);
         return;
@@ -66,7 +66,7 @@ export class EquipmentComponent  implements OnInit {
     console.log(obj.node.data);
     // this.router.navigateByUrl("pages/equipment/list/"+obj.node.data.K);
     // this.router.navigate("pages/equipment/list/"+obj.node.data.K);
-    this.router.navigate(['pages/equipment/list'],{ queryParams: { id: obj.node.data.K} });
+    this.router.navigate(['pages/equipment/list'],{ queryParams: { id: obj.node.data.k} });
 
     // var tmp = this.tree.treeModel.selectedLeafNodeIds;
     // let v = []
