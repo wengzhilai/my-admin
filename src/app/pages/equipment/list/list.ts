@@ -78,7 +78,7 @@ export class EquipmentListComponent implements OnInit {
         this.LoadSetting = true;
 
         this.configJson = {};
-        var cfgJsonList: Array<any> = data.data.ColumnsList;
+        var cfgJsonList: Array<any> = data.data.columnsList;
         this.clmNum = 0;
         cfgJsonList.forEach((element: any) => {
           console.log(element);
