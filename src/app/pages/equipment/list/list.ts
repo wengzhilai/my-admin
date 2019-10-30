@@ -38,7 +38,7 @@ export class EquipmentListComponent implements OnInit {
   /**
    * 用于绑定table的设置
    */
-  settings: any = SmartTableDataSource.getDefaultSetting();;
+  settings: any = Fun.GetTableSetting();;
   /**
    * 读取配置文件的设置
    */
@@ -62,7 +62,9 @@ export class EquipmentListComponent implements OnInit {
   ngOnInit() {
     this.routerIonfo.queryParams.subscribe(params => {
       this.code = params['id'];
-      this.LoadData();
+      if(this.code!=null){
+        this.LoadData();
+      }
     });
   }
 
@@ -111,7 +113,6 @@ export class EquipmentListComponent implements OnInit {
     this.selectedArr = event.selected
     if (this.selectedArr.length > 0) {
       console.log(this.selectedArr)
-
       this.windowService.open(LookModelComponent, {
         windowClass: "DivWindow",
         title: "查看",
@@ -170,14 +171,12 @@ export class EquipmentListComponent implements OnInit {
                 if (window.confirm('确定要保存吗？')) {
                   let postClass: any = {};
                   postClass.dataStr = JSON.stringify(x);
-                  postClass.TypeId = this.code
-                  if (defaultData == null || defaultData.Id == null) {
-                    apiUrl = "equipment/equipment/saveEquiment";
-                    postClass.Id = 0;
+                  postClass.typeId = this.code
+                  if (defaultData == null || defaultData.id == null) {
+                    postClass.id = 0;
                   }
                   else {
-                    apiUrl = "equipment/equipment/updateEquiment";
-                    postClass.Id = defaultData.Id;
+                    postClass.id = defaultData.id;
                   }
                   await Fun.ShowLoading();
 
@@ -224,13 +223,13 @@ export class EquipmentListComponent implements OnInit {
    */
   onDelete(event): void {
 
-    this.DeleteApi("equipment/Equipment/DeleteEquiment", event.data.Id)
+    this.DeleteApi("equipment/equipment/deleteEquiment", event.data.Id)
 
   }
 
 
   onSave(nowThis, event) {
-    this.Add("equipment/Equipment/SaveEquiment", "EditModelComponent", event.data, "equipment/Equipment/SingleEquiment")
+    this.Add("equipment/equipment/saveEquiment", "EditModelComponent", event.data, null)
   }
   /**
    * 删除
@@ -241,7 +240,7 @@ export class EquipmentListComponent implements OnInit {
   async DeleteApi(apiUrl, Key) {
     if (window.confirm("确认删除吗？")) {
       await Fun.ShowLoading();
-      this.HttpHelper.Post(apiUrl, { Id: Key, TypeId: this.code }).then((data: DtoResultObj<any>) => {
+      this.HttpHelper.Post(apiUrl, { id: Key, typeId: this.code }).then((data: DtoResultObj<any>) => {
         Fun.HideLoading()
         console.log(data)
         if (data.success) {
@@ -267,13 +266,17 @@ export class EquipmentListComponent implements OnInit {
     }
     else {
       if (defaultData == null) defaultData = {}
-      return new Promise((resolve, rejeact) => { resolve({ "IsSuccess": true, "Data": defaultData }) });
+      return new Promise((resolve, rejeact) => { resolve({ "success": true, "data": defaultData }) });
     }
   }
 
 
   ReLoad() {
     this.source.refresh()
+  }
+
+  showAdd(even){
+    this.Add("equipment/equipment/saveEquiment", "EditModelComponent", {}, "equipment/equipment/singleEquiment")
   }
 
 

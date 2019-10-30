@@ -52,29 +52,13 @@ export class EquipmentComponent  implements OnInit {
         return;
       }
       this.nodes=x.dataList;
-      // let nowMenu = this.JsonToMenuItemJson(x.dataList)
-      // var frist:NbMenuItem[]=[{
-      //   title: "首页",
-      //   icon: 'nb-e-commerce',
-      //   link: '/pages/dashboard',
-      // }]
-      // this.menu =frist.concat(this.menu);
+
     });
   }
 
   onSelect(obj) {
     console.log(obj.node.data);
-    // this.router.navigateByUrl("pages/equipment/list/"+obj.node.data.K);
-    // this.router.navigate("pages/equipment/list/"+obj.node.data.K);
     this.router.navigate(['pages/equipment/list'],{ queryParams: { id: obj.node.data.k} });
-
-    // var tmp = this.tree.treeModel.selectedLeafNodeIds;
-    // let v = []
-    // for (const key in tmp) {
-    //   if (tmp[key]) {
-    //     v.push(key);
-    //   }
-    // }
   }
 
 }

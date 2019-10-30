@@ -1,5 +1,5 @@
 <nb-card style="overflow-x:auto;overflow-y:hidden">
-  <nb-card-body>
+  <nb-card-body *ngIf="this.code!=null">
     <div>
       <div class="alert alert-primary">
         {{queryEnt.REMARK}}
@@ -12,16 +12,22 @@
 
     <tr #btnHead>
       <td [attr.colspan]="clmNum">
+          <div class="col-md-1">
+            <button type="button" nbButton (click)="showAdd($event)">
+              <i class="nb-plus-circled"></i>
+              <span>{{"public.Create"|translate}}</span>
+            </button>
+          </div>
           <div style="float: left;margin-right: 5px;" *ngFor="let item of headBtnSet">
-            <button type="button" class="btn btn-icon btn-primary btn-xs" (click)="HeadBtnClick(this,item.click)">
+            <button type="button" nbButton (click)="HeadBtnClick(this,item.click)">
               <i class="{{item.class}}"></i>
               <span>{{item.title}}</span>
             </button>
           </div>
       </td>
     </tr>
-    <ng2-smart-table style="margin: 5px" #samrtTable [settings]="settings" [source]="source" (delete)="onDelete($event)"
-      (edit)="onSave(this,$event)" (create)="onSave(this,$event)" (userRowSelect)="userRowSelect($event)" *ngIf="LoadSetting">
+    <ng2-smart-table *ngIf="LoadSetting" #samrtTable [settings]="settings" [source]="source" (delete)="onDelete($event)"
+      (userRowSelect)="userRowSelect($event)" (edit)="onSave(this,$event)" >
     </ng2-smart-table>
   </nb-card-body>
 </nb-card>
