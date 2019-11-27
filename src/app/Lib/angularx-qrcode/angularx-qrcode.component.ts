@@ -8,7 +8,7 @@ import {
     SimpleChange
   } from '@angular/core';
   
-  import * as QRCode from 'qrcodejs2';
+  // import * as QRCode from 'qrcodejs2';
   
   @Component({
     selector: 'qrcode',
@@ -40,15 +40,15 @@ import {
           throw new Error('Empty QR Code data');
         }
   
-        this.qrcode = new QRCode(this.el.nativeElement, {
-          colorDark: this.colordark,
-          colorLight: this.colorlight,
-          correctLevel: QRCode.CorrectLevel[this.level.toString()],
-          height: this.size,
-          text: this.qrdata || ' ',
-          useSVG: this.usesvg,
-          width: this.size,
-        });
+        // this.qrcode = new QRCode(this.el.nativeElement, {
+        //   colorDark: this.colordark,
+        //   colorLight: this.colorlight,
+        //   correctLevel: QRCode.CorrectLevel[this.level.toString()],
+        //   height: this.size,
+        //   text: this.qrdata || ' ',
+        //   useSVG: this.usesvg,
+        //   width: this.size,
+        // });
       } catch (e) {
         console.error('Error generating QR Code: ' + e.message);
       }
