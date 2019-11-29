@@ -48,14 +48,14 @@ export class Variables {
    * 上传文件接口
    */
   static get Api_Upfile(){
-    return "http://127.0.0.1:9100/uploadFile";
+    return "http://127.0.0.1:9000/file/UpFile/UploadPhotos";
   }
 
   /**
    * 查看图片地址
    */
   static get Api_LookUpfile(){
-    return "http://127.0.0.1:9100/downloadFile/";
+    return "http://127.0.0.1:9000/file/UpFile/LookfileByPath/";
   }
 
 

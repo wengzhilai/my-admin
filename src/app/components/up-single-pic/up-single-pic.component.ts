@@ -91,7 +91,7 @@ export class UpSinglePicComponent  implements OnInit {
 
       this.singleEnt = JSON.parse(response).data;
       // this.lookPicPath=Variables.Api_LookUpfile+this.singleEnt.fileName+"?path="+this.singleEnt.filePath;
-      this.lookPicPath=Variables.Api_LookUpfile+this.singleEnt.fileDownloadUri;
+      this.lookPicPath=Variables.Api_LookUpfile+this.singleEnt.url;
       
     };
     this.uploader.onAfterAddingAll = (fileItems: any) => {
@@ -103,6 +103,6 @@ export class UpSinglePicComponent  implements OnInit {
 
   ReturnJson() {
     console.log('返回值')
-    this.myModelChange.next(this.singleEnt.fileDownloadUri)
+    this.myModelChange.next(this.singleEnt.url)
   }
 }
