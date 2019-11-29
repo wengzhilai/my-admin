@@ -78,6 +78,7 @@ export class HttpHelper {
         .catch((error: any) => {
           console.error('请求失败');
           console.error(error);
+          console.groupEnd();
 
           var errObj: DtoResultObj<any> = new DtoResultObj<any>();
           errObj.success = false;
@@ -126,6 +127,23 @@ export class HttpHelper {
           var errObj: DtoResultObj<any> = new DtoResultObj<any>();
           errObj.success = false;
           errObj.msg = err.message;
+
+          var errObj: DtoResultObj<any> = new DtoResultObj<any>();
+          errObj.success = false;
+          switch (err.status) {
+            case 401:
+              errObj.msg = "登录超时,请重新登录";
+              break;
+            case 0:
+              errObj.msg = "请检查网络";
+              break;
+            default:
+              errObj.msg = err.message;
+              break;
+          }
+
+
+
           Fun.HideLoading();
           observer.next(errObj);
           observer.complete();
