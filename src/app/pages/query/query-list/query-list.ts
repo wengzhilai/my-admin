@@ -34,25 +34,25 @@ export class QueryListPage implements OnInit {
         smartTableCofnig.pagerLimitKey = ""
     this.source = new SmartTableDataSource(this.HttpHelper, smartTableCofnig,"query");
     this.configJson = {
-      "ID": {
+      "id": {
         "title": '查询ID',
         "type": 'number',
         "filter": false,
         "editable": false,
         "name":"id",
       },
-      "NAME": {
+      "name": {
         "title": '查询名',
         "filter": true,
         "type": 'string',
         "name":"name",
       },
-      "CODE": {
+      "code": {
         "title": '代码',
         "type": 'string',
         "name":"code",
       },
-      "AUTO_LOAD": {
+      "auto_load": {
         "title": '自动加载',
         "defaultValue": 1,
         "type": 'string',
@@ -68,13 +68,13 @@ export class QueryListPage implements OnInit {
           }
         }
       },
-      "PAGE_SIZE": {
+      "page_size": {
         "title": '页面大小',
         "type": 'number',
         "defaultValue": 10,
         "name":"pageSize",
       },
-      "SHOW_CHECKBOX": {
+      "show_checkbox": {
         "title": '允许多选',
         "type": 'string',
         "defaultValue": 1,
@@ -90,7 +90,7 @@ export class QueryListPage implements OnInit {
           }
         }
       },
-      "IS_DEBUG": {
+      "is_debug": {
         "title": '是否隐藏',
         "type": 'string',
         "defaultValue": 1,
@@ -106,23 +106,13 @@ export class QueryListPage implements OnInit {
           }
         }
       },
-      "FILTR_LEVEL": {
+      "filtr_level": {
         "title": '过滤层级',
         "type": 'number',
         "defaultValue": 1,
         "name":"filterLevel",
       },
-      "DESKTOP_ROLE": {
-        "title": '是否首页显示',
-        "type": 'string',
-        "name":"desktopRole",
-      },
-      "NEW_DATA": {
-        "title": '输入的时间',
-        "type": 'string',
-        "name":"newData",
-      },
-      "QUERY_CONF": {
+      "query_conf": {
         "title": '查询脚本',
         "type": 'string',
         "inputWidth": 12,
@@ -133,7 +123,7 @@ export class QueryListPage implements OnInit {
           "type": 'textarea'
         }
       },
-      "QUERY_CFG_JSON": {
+      "query_cfg_json": {
         "title": '列配置信息',
         "type": 'string',
         "isTabs": true,
@@ -145,7 +135,7 @@ export class QueryListPage implements OnInit {
         }
       },
 
-      "IN_PARA_JSON": {
+      "in_para_json": {
         "title": '传入的参数',
         "type": 'string',
         "isTabs": true,
@@ -156,7 +146,7 @@ export class QueryListPage implements OnInit {
           "type": 'textarea'
         }
       },
-      "JS_STR": {
+      "js_str": {
         "title": 'JS脚本',
         "type": 'string',
         "isTabs": true,
@@ -167,14 +157,14 @@ export class QueryListPage implements OnInit {
           "type": 'textarea'
         }
       },
-      "ROWS_BTN": {
+      "rows_btn": {
         "title": '行按钮',
         "isTabs": true,
         "hide": true,
         "name":"rowsBtn",
         "type": 'string'
       },
-      "HEARD_BTN": {
+      "heard_btn": {
         "title": '表头按钮',
         "isTabs": true,
         "hide": true,
@@ -182,7 +172,7 @@ export class QueryListPage implements OnInit {
         "type": 'string'
       },
 
-      "REMARK": {
+      "remark": {
         "title": '备注',
         "isTabs": true,
         "hide": true,

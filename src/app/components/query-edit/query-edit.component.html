@@ -6,45 +6,45 @@
     <div class="row show-grid">
       <div class="col-md-4">
         <div class="form-group">
-          <label>{{inputs['NAME'].title}}</label>
-          <input [(ngModel)]="bean[inputs['NAME'].name]" type="text" class="form-control"
-            placeholder="{{inputs['NAME'].placeholder}}">
+          <label>{{inputs['name'].title}}</label>
+          <input [(ngModel)]="bean[inputs['name'].name]" type="text" class="form-control"
+            placeholder="{{inputs['name'].placeholder}}">
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
-          <label>{{inputs['CODE'].title}}</label>
-          <input [(ngModel)]="bean[inputs['CODE'].name]" type="text" class="form-control"
-            placeholder="{{inputs['CODE'].placeholder}}">
+          <label>{{inputs['code'].title}}</label>
+          <input [(ngModel)]="bean[inputs['code'].name]" type="text" class="form-control"
+            placeholder="{{inputs['code'].placeholder}}">
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
-          <label>{{inputs['PAGE_SIZE'].title}}</label>
-          <input [(ngModel)]="bean[inputs['PAGE_SIZE'].name]" type="number" class="form-control"
-            placeholder="{{inputs['PAGE_SIZE'].placeholder}}">
+          <label>{{inputs['page_size'].title}}</label>
+          <input [(ngModel)]="bean[inputs['page_size'].name]" type="number" class="form-control"
+            placeholder="{{inputs['page_size'].placeholder}}">
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
-          <label>{{inputs['AUTO_LOAD'].title}}</label>
-          <nb-checkbox status="success" [(ngModel)]="bean[inputs['AUTO_LOAD'].name]" class="form-control">
-            {{inputs['AUTO_LOAD'].title}}</nb-checkbox>
+          <label>{{inputs['auto_load'].title}}</label>
+          <nb-checkbox status="success" [(ngModel)]="bean[inputs['auto_load'].name]" class="form-control">
+            {{inputs['auto_load'].title}}</nb-checkbox>
         </div>
       </div>
 
       <div class="col-md-4">
         <div class="form-group">
-          <label>{{inputs['SHOW_CHECKBOX'].title}}</label>
-          <nb-checkbox status="success" [(ngModel)]="bean[inputs['SHOW_CHECKBOX'].name]" class="form-control">
-            {{inputs['SHOW_CHECKBOX'].title}}</nb-checkbox>
+          <label>{{inputs['show_checkbox'].title}}</label>
+          <nb-checkbox status="success" [(ngModel)]="bean[inputs['show_checkbox'].name]" class="form-control">
+            {{inputs['show_checkbox'].title}}</nb-checkbox>
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
-          <label>{{inputs['IS_DEBUG'].title}}</label>
-          <nb-checkbox status="success" [(ngModel)]="bean[inputs['IS_DEBUG'].name]" class="form-control">
-            {{inputs['IS_DEBUG'].title}}</nb-checkbox>
+          <label>{{inputs['is_debug'].title}}</label>
+          <nb-checkbox status="success" [(ngModel)]="bean[inputs['is_debug'].name]" class="form-control">
+            {{inputs['is_debug'].title}}</nb-checkbox>
         </div>
       </div>
 
@@ -52,9 +52,9 @@
     <div class="row show-grid">
       <div class="col-md-12">
         <div class="form-group">
-          <label>{{inputs['QUERY_CONF'].title}}</label>
-          <textarea [(ngModel)]="bean[inputs['QUERY_CONF'].name]" rows="4"
-            placeholder="{{inputs['QUERY_CONF'].placeholder}}" class="form-control"></textarea>
+          <label>{{inputs['query_conf'].title}}</label>
+          <textarea [(ngModel)]="bean[inputs['query_conf'].name]" rows="4"
+            placeholder="{{inputs['query_conf'].placeholder}}" class="form-control"></textarea>
         </div>
       </div>
     </div>
@@ -62,20 +62,20 @@
       <div class="col-md-12">
         <nb-card size="small">
           <nb-tabset>
-            <nb-tab tabTitle="{{inputs['QUERY_CFG_JSON'].title}}">
+            <nb-tab tabTitle="{{inputs['query_cfg_json'].title}}">
               <span>
-                <textarea [(ngModel)]="bean[inputs['QUERY_CFG_JSON'].name]" rows="10"
-                  placeholder="{{inputs['QUERY_CFG_JSON'].placeholder}}" class="form-control"></textarea></span>
+                <textarea [(ngModel)]="bean[inputs['query_cfg_json'].name]" rows="10"
+                  placeholder="{{inputs['query_cfg_json'].placeholder}}" class="form-control"></textarea></span>
             </nb-tab>
-            <nb-tab tabTitle="{{inputs['ROWS_BTN'].title}}">
+            <nb-tab tabTitle="{{inputs['rows_btn'].title}}">
               <span>
-                <textarea [(ngModel)]="bean[inputs['ROWS_BTN'].name]" rows="10"
-                  placeholder="{{inputs['ROWS_BTN'].placeholder}}" class="form-control"></textarea></span>
+                <textarea [(ngModel)]="bean[inputs['rows_btn'].name]" rows="10"
+                  placeholder="{{inputs['rows_btn'].placeholder}}" class="form-control"></textarea></span>
             </nb-tab>
-            <nb-tab tabTitle="{{inputs['HEARD_BTN'].title}}">
+            <nb-tab tabTitle="{{inputs['heard_btn'].title}}">
               <span>
-                <textarea [(ngModel)]="bean[inputs['HEARD_BTN'].name]" rows="10"
-                  placeholder="{{inputs['HEARD_BTN'].placeholder}}" class="form-control"></textarea></span>
+                <textarea [(ngModel)]="bean[inputs['heard_btn'].name]" rows="10"
+                  placeholder="{{inputs['heard_btn'].placeholder}}" class="form-control"></textarea></span>
             </nb-tab>
 
           </nb-tabset>
@@ -85,6 +85,6 @@
   </div>
 </div>
 <div class="modal-footer">
-  <button type="button" *ngFor="let item of buttons" class="btn btn-hero-success"
+  <button type="button" *ngFor="let item of buttons" nbButton
     (click)="ButtonClick(item.click)">{{item.name}}</button>
 </div>

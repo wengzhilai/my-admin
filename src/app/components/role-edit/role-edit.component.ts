@@ -70,6 +70,7 @@ export class RoleEditComponent implements OnInit {
       console.log(this.bean)
       if (this.bean["moduleIdStr"] != null) {
         this.bean["moduleIdStr"].forEach(element => {
+          console.log(this.tree);
           this.tree.treeModel.selectedLeafNodeIds[element] = true
         });
       }

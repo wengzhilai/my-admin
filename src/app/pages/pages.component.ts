@@ -40,7 +40,7 @@ export class PagesComponent implements OnInit {
       let nowMenu = this.JsonToMenuItemJson(x.dataList)
       var frist:NbMenuItem[]=[{
         title: "首页",
-        icon: 'nb-e-commerce',
+        icon: 'bulb',
         link: '/pages/query/query',
         queryParams:{code:'role'},
         home:true

@@ -18,8 +18,10 @@ export class Variables {
   /**
    * 接口地址
    */
-  static Api:string = 'http://coreapi.wjbjp.cn/';
-  static ImgUrl:string = 'http://coreapi.wjbjp.cn/';
+  static Api:string = 'http://127.0.0.1:5000/';
+  static ImgUrl:string = 'http://127.0.0.1:5000/';
+  // static Api:string = 'http://coreapi.wjbjp.cn/';
+  // static ImgUrl:string = 'http://coreapi.wjbjp.cn/';
   // static Api:string = 'http://dotnetapi.wjbjp.cn/Api/';
   // static ImgUrl:string = 'http://dotnetapi.wjbjp.cn/';
    
@@ -48,14 +50,14 @@ export class Variables {
    * 上传文件接口
    */
   static get Api_Upfile(){
-    return "http://127.0.0.1:9000/file/UpFile/UploadPhotos";
+    return "http://127.0.0.1:5000/file/UpFile/UploadPhotos";
   }
 
   /**
    * 查看图片地址
    */
   static get Api_LookUpfile(){
-    return "http://127.0.0.1:9000/file/UpFile/LookfileByPath/";
+    return "http://127.0.0.1:5000/file/UpFile/LookfileByPath/";
   }
 
 

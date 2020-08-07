@@ -2,7 +2,7 @@
   <ul *ngIf="messageList && messageList.length">
     <li *ngFor="let item of messageList">{{item}}</li>
   </ul>
-  <div [ngStyle]="{'height':screenheight+'px','overflow-y':'auto'}">
+  <div *ngIf="inputs['name']!=null" [ngStyle]="{'height':screenheight+'px','overflow-y':'auto'}">
     <div class="row show-grid">
       <div class="col-md-12">
         <div class="form-group">
@@ -30,6 +30,6 @@
   </div>
 </div>
 <div class="modal-footer">
-  <button type="button" *ngFor="let item of buttons" class="btn btn-hero-success"
+  <button type="button" *ngFor="let item of buttons" nbButton
     (click)="ButtonClick(item.click)">{{item.name}}</button>
 </div>
