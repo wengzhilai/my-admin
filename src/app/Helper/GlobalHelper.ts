@@ -6,6 +6,8 @@ export class GlobalHelper {
 	public static SetToken(token: string) {
 		console.log("保存Token：" + token)
 		CookiesHelper.DeleteCookie("token");
+		console.log("读取：" + token)
+		console.log(CookiesHelper.GetCookie('token'));
 		CookiesHelper.SetCookie("token", token);
 	}
 

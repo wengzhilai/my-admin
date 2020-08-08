@@ -123,14 +123,17 @@ export class QueryQueryComponent implements OnInit {
           this.settings.selectMode = "single"
         }
 
+        this.settings.actions.edit = false;
+        this.settings.actions.delete = false;
         if (this.rowBtnSet.length > 1) {
           this.settings.actions.edit = true
           this.settings.edit.editButtonContent = '<i class="' + this.rowBtnSet[0].class + '"></i>'
+          if (this.rowBtnSet.length > 2) {
+            this.settings.actions.delete = true
+            this.settings.delete.deleteButtonContent = '<i class="' + this.rowBtnSet[1].class + '"></i>'
+          }
         }
-        if (this.rowBtnSet.length > 2) {
-          this.settings.actions.edit = true
-          this.settings.delete.deleteButtonContent = '<i class="' + this.rowBtnSet[1].class + '"></i>'
-        }
+
 
         let smartTableCofnig: ServerSourceConf = new ServerSourceConf();
         smartTableCofnig.endPoint = 'user/query/getListData';
@@ -257,8 +260,19 @@ export class QueryQueryComponent implements OnInit {
   async onExportXls() {
 
     var link = document.createElement("a");
-    var urlPar=JSON.stringify(this.source.getPostEnt());
-    link.setAttribute("href", Variables.Api + "user/query/downFile?postJson=" + encodeURIComponent(urlPar));
+    var object = this.source.getPostEnt();
+    var urlPar = JSON.stringify(object);
+    var lists = new Array<string>();
+    for (const key in object) {
+      if (Object.prototype.hasOwnProperty.call(object, key)) {
+        const element = object[key];
+        lists.push(key + "=" + element);
+      }
+    }
+    var getStr=lists.join("&");
+
+    // link.setAttribute("href", Variables.Api + "user/query/downFile?postJson=" + encodeURIComponent(urlPar));
+    link.setAttribute("href", Variables.Api + "user/query/downFileGet?" + getStr);
     link.style.visibility = 'hidden';
     document.body.appendChild(link);
     link.click();
@@ -266,10 +280,10 @@ export class QueryQueryComponent implements OnInit {
 
   }
 
-  
+
   filterBean: any = {};
   // whereList=[{ value: "值", opType: "类型",fieldType: "字段类型",fieldName:"字段名"}];
-  whereList=[];
+  whereList = [];
   /**
    * 打开筛选功能
    */
@@ -300,7 +314,7 @@ export class QueryQueryComponent implements OnInit {
                 console.log(this.configJson);
                 let whereObj = {};
                 //更新时间选择器
-                this.whereList=[];
+                this.whereList = [];
                 for (const key in x) {
                   if (x[key] == null || x[key] == "") {
                     continue;
@@ -317,8 +331,8 @@ export class QueryQueryComponent implements OnInit {
                       whereObj[key] = x[key];
                       break;
                   }
-                  this.whereList.push({ value: whereObj[key], opType: this.configJson[key].filter.opTypeValue,fieldType: this.configJson[key].type,fieldName:key});
-                  
+                  this.whereList.push({ value: whereObj[key], opType: this.configJson[key].filter.opTypeValue, fieldType: this.configJson[key].type, fieldName: key });
+
                 }
                 this.filterBean = x;
                 console.log(this.filterBean);
@@ -335,7 +349,7 @@ export class QueryQueryComponent implements OnInit {
   }
 
   ReLoad() {
-    this.source.whereList=this.whereList
+    this.source.whereList = this.whereList
     this.source.refresh()
   }
   /**

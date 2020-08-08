@@ -1,138 +1,140 @@
-export class CookiesHelper {
+import { LocalStorageHelper } from './LocalStorageHelper';
 
-	/**
-	 * Gets a  cookie by it's name
-	 *
-	 * @param  {string} cookieName Name/ID of cookie
-	 * @returns Cookies value
-	 */
-  public static GetCookie(cookieName: string): string {
+export class CookiesHelper  extends LocalStorageHelper {
 
-    let cookieExists = this.Exists(cookieName);
+	// /**
+	//  * Gets a  cookie by it's name
+	//  *
+	//  * @param  {string} cookieName Name/ID of cookie
+	//  * @returns Cookies value
+	//  */
+  // public static GetCookie(cookieName: string): string {
 
-    if (cookieExists) {
-      cookieName = encodeURIComponent(cookieName);
+  //   let cookieExists = this.Exists(cookieName);
 
-      let regexp = new RegExp('(?:^' + cookieName + '|;\\s*' + cookieName + ')=(.*?)(?:;|$)', 'g');
-      // console.log(document.cookie)
-      let cookies = regexp.exec(document.cookie);
-      // console.log(cookies)
-      let restr=decodeURIComponent(cookies[1]);
-      if (restr == null  || restr == ""|| restr == "null") {
-        return '';
-      }
-      return restr;
-    }
-    else {
-      return '';
-    }
-  }
+  //   if (cookieExists) {
+  //     cookieName = encodeURIComponent(cookieName);
 
-	/**
-	 * Sets the Cookie by name
-	 *
-	 * @param  {string} cookieName Name/ID of cookie
-	 * @param  {string} value cookie value
-	 * @param  {number} validity expiration date of cookie (default is minutes).
-	 * @param  {string} validityType Unit for specifying validity time: days || hours . If left blank, default validity is in minutes
-	 * @param  {string} domain Set a specific domain for the cookie to be reachable at
-	 * @param  {string} path Path relative to domain
-	 * @param  {boolean} needsSecureConnection true/false if cookie can only be accessed through secure
-	 */
-  public static SetCookie(cookieName: string, value: string, validity?: number, validityType?: string, domain?: string, path?: string, needsSecureConnection?: boolean) {
+  //     let regexp = new RegExp('(?:^' + cookieName + '|;\\s*' + cookieName + ')=(.*?)(?:;|$)', 'g');
+  //     // console.log(document.cookie)
+  //     let cookies = regexp.exec(document.cookie);
+  //     // console.log(cookies)
+  //     let restr=decodeURIComponent(cookies[1]);
+  //     if (restr == null  || restr == ""|| restr == "null") {
+  //       return '';
+  //     }
+  //     return restr;
+  //   }
+  //   else {
+  //     return '';
+  //   }
+  // }
 
-    let cookieStr = encodeURIComponent(cookieName) + '=' + encodeURIComponent(value) + ';';
+	// /**
+	//  * Sets the Cookie by name
+	//  *
+	//  * @param  {string} cookieName Name/ID of cookie
+	//  * @param  {string} value cookie value
+	//  * @param  {number} validity expiration date of cookie (default is minutes).
+	//  * @param  {string} validityType Unit for specifying validity time: days || hours . If left blank, default validity is in minutes
+	//  * @param  {string} domain Set a specific domain for the cookie to be reachable at
+	//  * @param  {string} path Path relative to domain
+	//  * @param  {boolean} needsSecureConnection true/false if cookie can only be accessed through secure
+	//  */
+  // public static SetCookie(cookieName: string, value: string, validity?: number, validityType?: string, domain?: string, path?: string, needsSecureConnection?: boolean) {
 
-		/**
-		 * Sets validity of cookie
-		 */
-    if (validity) {
+  //   let cookieStr = encodeURIComponent(cookieName) + '=' + encodeURIComponent(value) + ';';
 
-      let fullValidity = validity * 1000 * 60;
+	// 	/**
+	// 	 * Sets validity of cookie
+	// 	 */
+  //   if (validity) {
 
-      if (validityType == 'days') {
-        fullValidity *= (60 * 24);
-      }
-      else if (validityType == 'hours') {
-        fullValidity *= 60;
-      }
+  //     let fullValidity = validity * 1000 * 60;
 
-      let daysValid = new Date(new Date().getTime() + fullValidity);
+  //     if (validityType == 'days') {
+  //       fullValidity *= (60 * 24);
+  //     }
+  //     else if (validityType == 'hours') {
+  //       fullValidity *= 60;
+  //     }
 
-      cookieStr += 'expires=' + daysValid.toUTCString() + ';';
-    }
+  //     let daysValid = new Date(new Date().getTime() + fullValidity);
 
-    if (path) {
-      cookieStr += 'path=' + path + ';';
-    }
+  //     cookieStr += 'expires=' + daysValid.toUTCString() + ';';
+  //   }
 
-    if (domain) {
-      cookieStr += 'domain=' + domain + ';';
-    }
+  //   if (path) {
+  //     cookieStr += 'path=' + path + ';';
+  //   }
 
-    if (needsSecureConnection) {
-      cookieStr += 'secure;';
-    }
-    console.log('删除cookie')
-    console.log(cookieStr)
-    document.cookie = cookieStr;
-  }
+  //   if (domain) {
+  //     cookieStr += 'domain=' + domain + ';';
+  //   }
 
-  public static GetObjectCookie(cookieName: string): object {
-    let restr = this.GetCookie(cookieName)
-    if (restr == null  || restr == ""|| restr == "null") {
-      return null;
-    }
-    return JSON.parse(restr)
-  }
+  //   if (needsSecureConnection) {
+  //     cookieStr += 'secure;';
+  //   }
+  //   console.log('删除cookie')
+  //   console.log(cookieStr)
+  //   document.cookie = cookieStr;
+  // }
 
-	/**
-	 * Sets the Cookie by name
-	 *
-	 * @param  {string} cookieName Name/ID of cookie
-	 * @param  {string} value cookie value
-	 * @param  {number} validity expiration date of cookie (default is minutes).
-	 * @param  {string} validityType Unit for specifying validity time: days || hours . If left blank, default validity is in minutes
-	 * @param  {string} domain Set a specific domain for the cookie to be reachable at
-	 * @param  {string} path Path relative to domain
-	 * @param  {boolean} needsSecureConnection true/false if cookie can only be accessed through secure
-	 */
-  public static SetObjectCookie(cookieName: string, obj: object, validity?: number, validityType?: string, domain?: string, path?: string, needsSecureConnection?: boolean) {
-    let value: string = JSON.stringify(obj);
-    this.SetCookie(cookieName, value, validity, validityType, domain, path, needsSecureConnection)
-  }
+  // public static GetObjectCookie(cookieName: string): object {
+  //   let restr = this.GetCookie(cookieName)
+  //   if (restr == null  || restr == ""|| restr == "null") {
+  //     return null;
+  //   }
+  //   return JSON.parse(restr)
+  // }
 
-	/**
-	 * Deletes a specific cookie
-	 *
-	 * @param  {string} cookieName Name/ID of cookie
-	 * @param  {string} domain Set a specific domain for the cookie to be reachable at
-	 * @param  {string} path Path relative to domain
-	 */
-  public static DeleteCookie(cookieName: string, domain?: string, path?: string) {
+	// /**
+	//  * Sets the Cookie by name
+	//  *
+	//  * @param  {string} cookieName Name/ID of cookie
+	//  * @param  {string} value cookie value
+	//  * @param  {number} validity expiration date of cookie (default is minutes).
+	//  * @param  {string} validityType Unit for specifying validity time: days || hours . If left blank, default validity is in minutes
+	//  * @param  {string} domain Set a specific domain for the cookie to be reachable at
+	//  * @param  {string} path Path relative to domain
+	//  * @param  {boolean} needsSecureConnection true/false if cookie can only be accessed through secure
+	//  */
+  // public static SetObjectCookie(cookieName: string, obj: object, validity?: number, validityType?: string, domain?: string, path?: string, needsSecureConnection?: boolean) {
+  //   let value: string = JSON.stringify(obj);
+  //   this.SetCookie(cookieName, value, validity, validityType, domain, path, needsSecureConnection)
+  // }
 
-    for (let index = 0; index < 5; index++) {
-      let cookieExists = this.Exists(cookieName);
-      if (!cookieExists) {
-        break;
-      }
-      this.SetCookie(cookieName, '', -1, domain, path);
-    }
-  }
+	// /**
+	//  * Deletes a specific cookie
+	//  *
+	//  * @param  {string} cookieName Name/ID of cookie
+	//  * @param  {string} domain Set a specific domain for the cookie to be reachable at
+	//  * @param  {string} path Path relative to domain
+	//  */
+  // public static DeleteCookie(cookieName: string, domain?: string, path?: string) {
+    
+  //   for (let index = 0; index < 5; index++) {
+  //     let cookieExists = this.Exists(cookieName);
+  //     if (!cookieExists) {
+  //       break;
+  //     }
+  //     this.SetCookie(cookieName, '', -1, domain, path);
+  //   }
+  // }
 
-	/**
-	 * Checks if the cookie exists
-	 * @param  {string} cookieName Name/ID of cookie
-	 * @returns existence of the cookie
-	 */
-  public static Exists(cookieName: string): boolean {
+	// /**
+	//  * Checks if the cookie exists
+	//  * @param  {string} cookieName Name/ID of cookie
+	//  * @returns existence of the cookie
+	//  */
+  // public static Exists(cookieName: string): boolean {
 
-    cookieName = encodeURIComponent(cookieName);
+  //   cookieName = encodeURIComponent(cookieName);
 
-    let regexp = new RegExp('(?:^' + cookieName + '|;\\s*' + cookieName + ')=(.*?)(?:;|$)', 'g');
-    let exists = regexp.test(document.cookie);
+  //   let regexp = new RegExp('(?:^' + cookieName + '|;\\s*' + cookieName + ')=(.*?)(?:;|$)', 'g');
+  //   let exists = regexp.test(document.cookie);
 
-    return exists;
-  }
+  //   return exists;
+  // }
 
 }

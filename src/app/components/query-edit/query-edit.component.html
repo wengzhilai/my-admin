@@ -77,7 +77,11 @@
                 <textarea [(ngModel)]="bean[inputs['heard_btn'].name]" rows="10"
                   placeholder="{{inputs['heard_btn'].placeholder}}" class="form-control"></textarea></span>
             </nb-tab>
-
+            <nb-tab tabTitle="{{inputs['js_str'].title}}">
+              <span>
+                <textarea [(ngModel)]="bean[inputs['js_str'].name]" rows="10"
+                  placeholder="{{inputs['js_str'].placeholder}}" class="form-control"></textarea></span>
+            </nb-tab>
           </nb-tabset>
         </nb-card>
       </div>
